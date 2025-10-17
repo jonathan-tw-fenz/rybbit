@@ -5,6 +5,7 @@ import { ImportStatusManager } from "../../services/import/importStatusManager.j
 import { deleteImportFile } from "../../services/import/utils.js";
 import { IS_CLOUD } from "../../lib/const.js";
 import { r2Storage } from "../../services/storage/r2StorageService.js";
+import { clickhouse } from "../../db/clickhouse/clickhouse.js";
 
 const deleteImportRequestSchema = z.object({
   params: z.object({
@@ -37,26 +38,21 @@ export async function deleteSiteImport(
       return reply.status(403).send({ error: "Forbidden" });
     }
 
-    // Get the import to verify it exists and belongs to this site
     const importRecord = await ImportStatusManager.getImportById(importId);
     if (!importRecord) {
       return reply.status(404).send({ error: "Import not found" });
     }
 
-    // Verify the import belongs to this site
     if (importRecord.siteId !== Number(site)) {
       return reply.status(403).send({ error: "Import does not belong to this site" });
     }
 
-    // Don't allow deletion of active imports
     if (importRecord.status === "pending" || importRecord.status === "processing") {
       return reply.status(400).send({ error: "Cannot delete active import" });
     }
 
     // Delete the import file if it exists
     try {
-      // For completed/failed imports, try to delete the file
-      // We construct the storage location based on whether it's R2 or local
       let storageLocation: string;
       if (IS_CLOUD && r2Storage.isEnabled()) {
         storageLocation = `imports/${importId}/${importRecord.fileName}`;
@@ -68,6 +64,24 @@ export async function deleteSiteImport(
     } catch (fileError) {
       // Log the error but don't fail the deletion - the file might not exist
       console.warn(`Failed to delete import file for ${importId}:`, fileError);
+    }
+
+    // Delete events from ClickHouse that were imported with this importId
+    // This is a critical operation - if it fails, we fail the entire deletion
+    try {
+      await clickhouse.command({
+        query: `DELETE FROM events WHERE import_id = {importId:String} AND site_id = {siteId:UInt16}`,
+        query_params: {
+          importId: importId,
+          siteId: Number(site),
+        },
+      });
+      console.log(`Deleted events for import ${importId} from ClickHouse`);
+    } catch (chError) {
+      console.error(`Failed to delete ClickHouse events for ${importId}:`, chError);
+      return reply.status(500).send({
+        error: "Failed to delete imported events from database"
+      });
     }
 
     // Delete the import record from the database

@@ -12,7 +12,10 @@ export async function deleteSite(request: FastifyRequest<{ Params: { id: string 
   }
 
   await clickhouse.command({
-    query: `DELETE FROM events WHERE site_id = ${id}`,
+    query: `DELETE FROM events WHERE site_id = {siteId:UInt16}`,
+    query_params: {
+      siteId: Number(id),
+    },
   });
 
   siteConfig.removeSite(Number(id));
