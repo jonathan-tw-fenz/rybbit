@@ -82,7 +82,7 @@ export class BullMQAdapter implements IJobQueue {
         queue = new Queue(queueName, {
           connection: this.connection,
           defaultJobOptions: {
-            attempts: 1, // No retries, same as pg-boss
+            attempts: 1,
             removeOnComplete: true,
             removeOnFail: true,
           },
