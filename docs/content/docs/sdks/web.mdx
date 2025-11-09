@@ -74,10 +74,6 @@ These options are configured in your code and control SDK behavior locally:
 | `skipPatterns`         | `string[]` | `[]`    | Array of path patterns. Pageviews whose path matches any pattern will **not** be tracked. See [Path Matching](#path-matching).                                          |
 | `maskPatterns`         | `string[]` | `[]`    | Array of path patterns. For matching pageview paths, the original path will be **replaced** by the pattern itself in tracked data. See [Path Matching](#path-matching). |
 | `debug`                | `boolean` | `false` | Enable detailed logging to the browser console.                                                                                                                         |
-| `enableRemoteConfig`   | `boolean` | `true`  | Enable fetching configuration from your Rybbit instance on init. Disable to skip remote config fetch.                                                                  |
-| `remoteConfigTimeout`  | `number` | `3000`  | Timeout in milliseconds for fetching remote configuration.                                                                                                              |
-| `replayBufferSize`     | `number` | `250`   | Number of session replay events to buffer before sending to server.                                                                                                     |
-| `replayBatchInterval`  | `number` | `5000`  | Interval in milliseconds for sending session replay event batches.                                                                                                      |
 | `replayPrivacyConfig`  | `object` | -       | Privacy settings for session replay. See [Session Replay](#session-replay).                                                                                            |
 
 #### Remote Configuration
