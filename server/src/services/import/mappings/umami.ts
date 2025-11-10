@@ -50,45 +50,6 @@ export interface UmamiEvent {
   // job_id: string | null; // Ignore
 }
 
-export const umamiHeaders = [
-  undefined,
-  "session_id",
-  undefined,
-  undefined,
-  "hostname",
-  "browser",
-  "os",
-  "device",
-  "screen",
-  "language",
-  "country",
-  "region",
-  "city",
-  "url_path",
-  "url_query",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  "referrer_path",
-  "referrer_query",
-  "referrer_domain",
-  "page_title",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  "event_type",
-  "event_name",
-  undefined,
-  "distinct_id",
-  "created_at",
-  undefined,
-];
-
 export class UmamiImportMapper {
   private static readonly browserMap: Record<string, string> = {
     chrome: "Chrome",
