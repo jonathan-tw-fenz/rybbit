@@ -154,6 +154,7 @@ export async function batchImportEvents(request: FastifyRequest<BatchImportReque
       });
     }
   } catch (error) {
+    console.error("Error importing events", error);
     return reply.status(500).send({ error: "Internal server error" });
   }
 }
