@@ -14,7 +14,6 @@ export interface SiteConfigData {
   blockBots: boolean;
   excludedIPs: string[];
   excludedCountries: string[];
-  apiKey?: string | null;
   privateLinkKey?: string | null;
   sessionReplay: boolean;
   webVitals: boolean;
@@ -61,7 +60,6 @@ class SiteConfig {
           blockBots: sites.blockBots,
           excludedIPs: sites.excludedIPs,
           excludedCountries: sites.excludedCountries,
-          apiKey: sites.apiKey,
           privateLinkKey: sites.privateLinkKey,
           sessionReplay: sites.sessionReplay,
           webVitals: sites.webVitals,
@@ -89,7 +87,6 @@ class SiteConfig {
         blockBots: site.blockBots === undefined ? true : site.blockBots,
         excludedIPs: Array.isArray(site.excludedIPs) ? site.excludedIPs : [],
         excludedCountries: Array.isArray(site.excludedCountries) ? site.excludedCountries : [],
-        apiKey: site.apiKey,
         privateLinkKey: site.privateLinkKey,
         sessionReplay: site.sessionReplay || false,
         webVitals: site.webVitals || false,
@@ -149,7 +146,6 @@ class SiteConfig {
         saltUserIds: config.saltUserIds,
         blockBots: config.blockBots,
         excludedIPs: config.excludedIPs,
-        apiKey: config.apiKey,
         createdBy: "", // This would need to be provided
       });
     } catch (error) {
