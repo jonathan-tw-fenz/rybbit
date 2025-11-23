@@ -9,4 +9,8 @@ export default {
     "Rybbit Analytics for E-commerce Websites",
   "onyx-ai-knowledge-platform":
     "How We Use Onyx to Power Knowledge Management at Rybbit",
+  "marketing-attribution-tools":
+    "Best Marketing Attribution Tools & Software for 2025",
+  "what-is-web-analytics":
+    "What is Web Analytics? A Complete Guide to Understanding Your Visitors with Rybbit",
 };
