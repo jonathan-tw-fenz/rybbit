@@ -62,9 +62,9 @@ export async function createSiteImport(request: FastifyRequest<CreateSiteImportR
 
     try {
       const quotaTracker = await importQuotaManager.getTracker(organizationId);
-      const summary = quotaTracker.getSummary();
+      const oldestAllowedMonth = quotaTracker.getOldestAllowedMonth();
 
-      const earliestAllowedDate = DateTime.fromFormat(summary.oldestAllowedMonth + "01", "yyyyMMdd", {
+      const earliestAllowedDate = DateTime.fromFormat(oldestAllowedMonth + "01", "yyyyMMdd", {
         zone: "utc",
       }).toFormat("yyyy-MM-dd");
       const latestAllowedDate = DateTime.utc().toFormat("yyyy-MM-dd");
@@ -86,7 +86,8 @@ export async function createSiteImport(request: FastifyRequest<CreateSiteImportR
       });
     } catch (error) {
       importQuotaManager.completeImport(organizationId);
-      throw error;
+      console.error("Error creating import:", error);
+      return reply.status(500).send({ error: "Internal server error" });
     }
   } catch (error) {
     console.error("Error creating import:", error);

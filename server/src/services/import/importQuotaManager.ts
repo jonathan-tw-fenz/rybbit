@@ -1,4 +1,4 @@
-import { ImportQuotaTracker } from "./importQuotaChecker.js";
+import { ImportQuotaTracker } from "./importQuotaTracker.js";
 import { IS_CLOUD } from "../../lib/const.js";
 
 interface CachedTracker {

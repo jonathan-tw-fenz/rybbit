@@ -192,34 +192,7 @@ export class ImportQuotaTracker {
     return true;
   }
 
-  getSummary(): {
-    totalMonthsInWindow: number;
-    monthsAtCapacity: number;
-    monthsWithSpace: number;
-    oldestAllowedMonth: string;
-  } {
-    if (this.monthlyLimit === Infinity) {
-      return {
-        totalMonthsInWindow: this.historicalWindowMonths,
-        monthsAtCapacity: 0,
-        monthsWithSpace: this.historicalWindowMonths,
-        oldestAllowedMonth: this.oldestAllowedMonth,
-      };
-    }
-
-    // Calculate directly from stored data instead of regenerating all monthly quotas
-    let monthsAtCapacity = 0;
-    for (const usage of this.monthlyUsage.values()) {
-      if (usage >= this.monthlyLimit) {
-        monthsAtCapacity++;
-      }
-    }
-
-    return {
-      totalMonthsInWindow: this.historicalWindowMonths,
-      monthsAtCapacity,
-      monthsWithSpace: this.historicalWindowMonths - monthsAtCapacity,
-      oldestAllowedMonth: this.oldestAllowedMonth,
-    };
+  getOldestAllowedMonth(): string {
+    return this.oldestAllowedMonth;
   }
 }
