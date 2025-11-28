@@ -11,49 +11,42 @@ import { IS_CLOUD } from "../../lib/const.js";
  * Get the number of months of historical data allowed for import based on subscription tier
  */
 function getHistoricalWindowMonths(subscription: SubscriptionInfo): number {
-  // Free tier: 6 months
   if (subscription.source === "free") {
     return 6;
   }
 
-  // AppSumo: treat as Standard tier (24 months)
   if (subscription.source === "appsumo") {
     return 24;
   }
 
-  // Stripe: check if pro or standard
   if (subscription.source === "stripe") {
     if (subscription.planName.startsWith("pro")) {
-      return 60; // Pro tier: 60 months
+      return 60;
     }
-    return 24; // Standard tier: 24 months
+    return 24;
   }
 
-  // Default to free tier
   return 6;
 }
 
 export class ImportQuotaTracker {
   private monthlyUsage: Map<string, number>;
   private readonly monthlyLimit: number;
-  private readonly historicalWindowMonths: number;
   private readonly oldestAllowedMonth: string;
 
   private constructor(
     monthlyUsage: Map<string, number>,
     monthlyLimit: number,
-    historicalWindowMonths: number,
     oldestAllowedMonth: string
   ) {
     this.monthlyUsage = monthlyUsage;
     this.monthlyLimit = monthlyLimit;
-    this.historicalWindowMonths = historicalWindowMonths;
     this.oldestAllowedMonth = oldestAllowedMonth;
   }
 
   static async create(organizationId: string): Promise<ImportQuotaTracker> {
     if (!IS_CLOUD) {
-      return new ImportQuotaTracker(new Map(), Infinity, Infinity, "190001");
+      return new ImportQuotaTracker(new Map(), Infinity, "190001");
     }
 
     const [org] = await db
@@ -82,12 +75,12 @@ export class ImportQuotaTracker {
     const siteIds = siteRecords.map(s => s.siteId);
 
     if (siteIds.length === 0) {
-      return new ImportQuotaTracker(new Map(), monthlyLimit, historicalWindowMonths, oldestAllowedMonth);
+      return new ImportQuotaTracker(new Map(), monthlyLimit, oldestAllowedMonth);
     }
 
     const monthlyUsage = await ImportQuotaTracker.queryMonthlyUsage(siteIds, oldestAllowedDate.toFormat("yyyy-MM-dd"));
 
-    return new ImportQuotaTracker(monthlyUsage, monthlyLimit, historicalWindowMonths, oldestAllowedMonth);
+    return new ImportQuotaTracker(monthlyUsage, monthlyLimit, oldestAllowedMonth);
   }
 
   private static async queryMonthlyUsage(siteIds: number[], startDate: string): Promise<Map<string, number>> {
@@ -178,7 +171,6 @@ export class ImportQuotaTracker {
     }
 
     const month = dt.toFormat("yyyyMM");
-
     if (month < this.oldestAllowedMonth) {
       return false;
     }

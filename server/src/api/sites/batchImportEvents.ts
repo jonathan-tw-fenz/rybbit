@@ -56,10 +56,6 @@ export async function batchImportEvents(request: FastifyRequest<BatchImportReque
       return reply.status(400).send({ error: "Import does not belong to this site" });
     }
 
-    if (importRecord.completedAt) {
-      return reply.status(400).send({ error: "Import already completed" });
-    }
-
     const [siteRecord] = await db
       .select({ organizationId: sites.organizationId })
       .from(sites)
