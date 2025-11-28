@@ -29,8 +29,8 @@ export function SocialButtons({
     try {
       await authClient.signIn.social({
         provider,
-        ...(callbackURL && mode !== "signup" ? { callbackURL } : {}),
-        // For signup flow, new users should be redirected to the same callbackURL
+        ...(callbackURL ? { callbackURL } : {}),
+        // For signup flow, new users should also be redirected to the callbackURL
         ...(mode === "signup" && callbackURL ? { newUserCallbackURL: callbackURL } : {}),
       });
     } catch (error) {
