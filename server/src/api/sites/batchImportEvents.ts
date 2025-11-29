@@ -104,6 +104,7 @@ export async function batchImportEvents(request: FastifyRequest<BatchImportReque
       console.error("Failed to insert events:", errorMessage);
 
       if (isLastBatch) {
+        await completeImport(importId);
         importQuotaManager.completeImport(siteRecord.organizationId);
       }
 
