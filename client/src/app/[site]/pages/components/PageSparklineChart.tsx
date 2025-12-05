@@ -2,11 +2,11 @@
 
 import { GetOverviewBucketedResponse } from "@/api/analytics/useGetOverviewBucketed";
 import { APIResponse } from "@/api/types";
+import { ChartTooltip } from "@/components/charts/ChartTooltip";
 import { hour12, userLocale } from "@/lib/dateTimeUtils";
-import { nivoTheme } from "@/lib/nivo";
+import { useNivoTheme } from "@/lib/nivo";
 import { ResponsiveLine } from "@nivo/line";
 import { DateTime } from "luxon";
-import { ChartTooltip } from "@/components/charts/ChartTooltip";
 
 interface PageSparklineChartProps {
   data: APIResponse<GetOverviewBucketedResponse> | undefined;
@@ -16,6 +16,7 @@ interface PageSparklineChartProps {
 }
 
 export function PageSparklineChart({ data, isHovering, pageTitle, isLoading }: PageSparklineChartProps) {
+  const nivoTheme = useNivoTheme();
   if (isLoading) {
     return (
       <div className="h-full w-full flex items-center justify-center animate-pulse">
