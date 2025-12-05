@@ -1,0 +1,844 @@
+---
+title: Goals
+description: Create and track conversion goals based on page visits or custom events
+full: true
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+See the [API Reference](/docs/api/stats/reference) for authentication, common parameters, and filters.
+
+## Endpoints
+
+<div className="flex flex-col gap-2 my-6">
+  <a href="#get-goals" className="flex items-center gap-3 p-3 rounded-lg bg-fd-secondary/50 hover:bg-fd-secondary transition-colors no-underline">
+    <span className="px-2 py-1 text-xs font-bold rounded bg-green-500/20 text-green-600 dark:text-green-400">GET</span>
+    <code className="text-sm">/api/goals/:site</code>
+  </a>
+  <a href="#get-goal-sessions" className="flex items-center gap-3 p-3 rounded-lg bg-fd-secondary/50 hover:bg-fd-secondary transition-colors no-underline">
+    <span className="px-2 py-1 text-xs font-bold rounded bg-green-500/20 text-green-600 dark:text-green-400">GET</span>
+    <code className="text-sm">/api/goals/:goalId/sessions/:site</code>
+  </a>
+  <a href="#create-goal" className="flex items-center gap-3 p-3 rounded-lg bg-fd-secondary/50 hover:bg-fd-secondary transition-colors no-underline">
+    <span className="px-2 py-1 text-xs font-bold rounded bg-blue-500/20 text-blue-600 dark:text-blue-400">POST</span>
+    <code className="text-sm">/api/goal/create</code>
+  </a>
+  <a href="#update-goal" className="flex items-center gap-3 p-3 rounded-lg bg-fd-secondary/50 hover:bg-fd-secondary transition-colors no-underline">
+    <span className="px-2 py-1 text-xs font-bold rounded bg-yellow-500/20 text-yellow-600 dark:text-yellow-400">PUT</span>
+    <code className="text-sm">/api/goal/update</code>
+  </a>
+  <a href="#delete-goal" className="flex items-center gap-3 p-3 rounded-lg bg-fd-secondary/50 hover:bg-fd-secondary transition-colors no-underline">
+    <span className="px-2 py-1 text-xs font-bold rounded bg-red-500/20 text-red-600 dark:text-red-400">DELETE</span>
+    <code className="text-sm">/api/goal/:goalId</code>
+  </a>
+</div>
+
+---
+
+## Get Goals
+
+<div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<div>
+
+```
+GET /api/goals/:site
+```
+
+Returns a paginated list of goals with their conversion metrics.
+
+### Path Parameters
+
+<TypeTable
+  type={{
+    site: {
+      description: 'Site ID or site identifier',
+      type: 'string | number',
+      required: true,
+    },
+  }}
+/>
+
+### Query Parameters
+
+Accepts all [Common Parameters](/docs/api/stats/reference#common-parameters) plus the following:
+
+<TypeTable
+  type={{
+    page: {
+      description: 'Page number (1-indexed)',
+      type: 'number',
+      default: 1,
+    },
+    page_size: {
+      description: 'Number of results per page (max 100)',
+      type: 'number',
+      default: 10,
+    },
+    sort: {
+      description: 'Field to sort by',
+      type: 'string',
+      typeDescription: '"goalId" | "name" | "goalType" | "createdAt"',
+      default: 'createdAt',
+    },
+    order: {
+      description: 'Sort direction',
+      type: 'string',
+      typeDescription: '"asc" | "desc"',
+      default: 'desc',
+    },
+  }}
+/>
+
+### Response
+
+<TypeTable
+  type={{
+    data: {
+      description: 'Array of goal objects with conversion data',
+      type: 'Goal[]',
+    },
+    meta: {
+      description: 'Pagination metadata',
+      type: 'PaginationMeta',
+    },
+  }}
+/>
+
+#### Goal Object
+
+<TypeTable
+  type={{
+    goalId: {
+      description: 'Unique goal identifier',
+      type: 'number',
+    },
+    name: {
+      description: 'Goal name',
+      type: 'string | null',
+    },
+    goalType: {
+      description: 'Type of goal',
+      type: 'string',
+      typeDescription: '"path" | "event"',
+    },
+    config: {
+      description: 'Goal configuration',
+      type: 'GoalConfig',
+    },
+    createdAt: {
+      description: 'Creation timestamp',
+      type: 'string',
+      typeDescription: 'ISO 8601 datetime',
+    },
+    total_conversions: {
+      description: 'Number of sessions that completed the goal',
+      type: 'number',
+    },
+    total_sessions: {
+      description: 'Total sessions in the time period',
+      type: 'number',
+    },
+    conversion_rate: {
+      description: 'Conversion rate (0-1)',
+      type: 'number',
+    },
+  }}
+/>
+
+#### GoalConfig Object
+
+<TypeTable
+  type={{
+    pathPattern: {
+      description: 'URL path pattern (for path goals). Supports wildcards (*)',
+      type: 'string',
+      required: false,
+    },
+    eventName: {
+      description: 'Event name to match (for event goals)',
+      type: 'string',
+      required: false,
+    },
+    eventPropertyKey: {
+      description: 'Event property key to match',
+      type: 'string',
+      required: false,
+    },
+    eventPropertyValue: {
+      description: 'Event property value to match',
+      type: 'string | number | boolean',
+      required: false,
+    },
+  }}
+/>
+
+</div>
+<div className="flex flex-col gap-4">
+
+<Tabs items={['cURL', 'JavaScript', 'Python']}>
+  <Tab value="cURL">
+```bash title="Request"
+curl -X GET "https://api.rybbit.io/api/goals/123?start_date=2024-01-01&end_date=2024-01-31" \
+  -H "Authorization: Bearer your_api_key_here"
+```
+  </Tab>
+  <Tab value="JavaScript">
+```javascript title="Request"
+const response = await fetch(
+  'https://api.rybbit.io/api/goals/123?start_date=2024-01-01&end_date=2024-01-31',
+  {
+    headers: {
+      'Authorization': 'Bearer your_api_key_here'
+    }
+  }
+);
+
+const data = await response.json();
+```
+  </Tab>
+  <Tab value="Python">
+```python title="Request"
+import requests
+
+response = requests.get(
+    'https://api.rybbit.io/api/goals/123',
+    params={
+        'start_date': '2024-01-01',
+        'end_date': '2024-01-31'
+    },
+    headers={
+        'Authorization': 'Bearer your_api_key_here'
+    }
+)
+
+data = response.json()
+```
+  </Tab>
+</Tabs>
+
+```json title="Response"
+{
+  "data": [
+    {
+      "goalId": 1,
+      "name": "Signup Completed",
+      "goalType": "path",
+      "config": {
+        "pathPattern": "/signup/complete"
+      },
+      "createdAt": "2024-01-10T12:00:00.000Z",
+      "total_conversions": 1250,
+      "total_sessions": 15420,
+      "conversion_rate": 0.081
+    },
+    {
+      "goalId": 2,
+      "name": "Purchase Made",
+      "goalType": "event",
+      "config": {
+        "eventName": "purchase",
+        "eventPropertyKey": "value",
+        "eventPropertyValue": 100
+      },
+      "createdAt": "2024-01-15T09:30:00.000Z",
+      "total_conversions": 320,
+      "total_sessions": 15420,
+      "conversion_rate": 0.021
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "page": 1,
+    "pageSize": 10,
+    "totalPages": 1
+  }
+}
+```
+
+</div>
+</div>
+
+---
+
+## Get Goal Sessions
+
+<div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<div>
+
+```
+GET /api/goals/:goalId/sessions/:site
+```
+
+Returns sessions that completed a specific goal. Useful for analyzing the behavior of converting users.
+
+### Path Parameters
+
+<TypeTable
+  type={{
+    goalId: {
+      description: 'Goal ID',
+      type: 'string | number',
+      required: true,
+    },
+    site: {
+      description: 'Site ID or site identifier',
+      type: 'string | number',
+      required: true,
+    },
+  }}
+/>
+
+### Query Parameters
+
+Accepts all [Common Parameters](/docs/api/stats/reference#common-parameters) plus the following:
+
+<TypeTable
+  type={{
+    page: {
+      description: 'Page number (1-indexed)',
+      type: 'number',
+      default: 1,
+    },
+    limit: {
+      description: 'Number of results per page',
+      type: 'number',
+      default: 25,
+    },
+  }}
+/>
+
+### Response
+
+<TypeTable
+  type={{
+    data: {
+      description: 'Array of session objects',
+      type: 'Session[]',
+    },
+  }}
+/>
+
+#### Session Object
+
+<TypeTable
+  type={{
+    session_id: {
+      description: 'Unique session identifier',
+      type: 'string',
+    },
+    user_id: {
+      description: 'User identifier',
+      type: 'string',
+    },
+    country: {
+      description: 'Country code',
+      type: 'string',
+    },
+    browser: {
+      description: 'Browser name',
+      type: 'string',
+    },
+    operating_system: {
+      description: 'Operating system',
+      type: 'string',
+    },
+    device_type: {
+      description: 'Device type',
+      type: 'string',
+    },
+    entry_page: {
+      description: 'First page visited',
+      type: 'string',
+    },
+    exit_page: {
+      description: 'Last page visited',
+      type: 'string',
+    },
+    pageviews: {
+      description: 'Number of pageviews',
+      type: 'number',
+    },
+    session_duration: {
+      description: 'Session duration in seconds',
+      type: 'number',
+    },
+    session_start: {
+      description: 'Session start time',
+      type: 'string',
+      typeDescription: 'ISO 8601 datetime',
+    },
+    session_end: {
+      description: 'Session end time',
+      type: 'string',
+      typeDescription: 'ISO 8601 datetime',
+    },
+  }}
+/>
+
+</div>
+<div className="flex flex-col gap-4">
+
+<Tabs items={['cURL', 'JavaScript', 'Python']}>
+  <Tab value="cURL">
+```bash title="Request"
+curl -X GET "https://api.rybbit.io/api/goals/1/sessions/123?page=1&limit=10" \
+  -H "Authorization: Bearer your_api_key_here"
+```
+  </Tab>
+  <Tab value="JavaScript">
+```javascript title="Request"
+const response = await fetch(
+  'https://api.rybbit.io/api/goals/1/sessions/123?page=1&limit=10',
+  {
+    headers: {
+      'Authorization': 'Bearer your_api_key_here'
+    }
+  }
+);
+
+const data = await response.json();
+```
+  </Tab>
+  <Tab value="Python">
+```python title="Request"
+import requests
+
+response = requests.get(
+    'https://api.rybbit.io/api/goals/1/sessions/123',
+    params={
+        'page': 1,
+        'limit': 10
+    },
+    headers={
+        'Authorization': 'Bearer your_api_key_here'
+    }
+)
+
+data = response.json()
+```
+  </Tab>
+</Tabs>
+
+```json title="Response"
+{
+  "data": [
+    {
+      "session_id": "sess_abc123",
+      "user_id": "user_xyz789",
+      "country": "US",
+      "browser": "Chrome",
+      "operating_system": "macOS",
+      "device_type": "desktop",
+      "entry_page": "/",
+      "exit_page": "/signup/complete",
+      "pageviews": 5,
+      "session_duration": 245,
+      "session_start": "2024-01-31T14:00:00.000Z",
+      "session_end": "2024-01-31T14:04:05.000Z",
+      "referrer": "https://google.com",
+      "channel": "organic"
+    }
+  ]
+}
+```
+
+</div>
+</div>
+
+---
+
+## Create Goal
+
+<div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<div>
+
+```
+POST /api/goal/create
+```
+
+Creates a new goal for tracking conversions.
+
+### Request Body
+
+<TypeTable
+  type={{
+    siteId: {
+      description: 'Site ID to create the goal for',
+      type: 'number',
+      required: true,
+    },
+    name: {
+      description: 'Goal name',
+      type: 'string',
+      required: false,
+    },
+    goalType: {
+      description: 'Type of goal',
+      type: 'string',
+      typeDescription: '"path" | "event"',
+      required: true,
+    },
+    config: {
+      description: 'Goal configuration',
+      type: 'GoalConfig',
+      required: true,
+    },
+  }}
+/>
+
+#### GoalConfig for Path Goals
+
+<TypeTable
+  type={{
+    pathPattern: {
+      description: 'URL path pattern to match. Supports wildcards (*)',
+      type: 'string',
+      required: true,
+      typeDescription: 'e.g., "/checkout/*", "/signup/complete"',
+    },
+  }}
+/>
+
+#### GoalConfig for Event Goals
+
+<TypeTable
+  type={{
+    eventName: {
+      description: 'Event name to match',
+      type: 'string',
+      required: true,
+    },
+    eventPropertyKey: {
+      description: 'Property key to match (optional)',
+      type: 'string',
+      required: false,
+    },
+    eventPropertyValue: {
+      description: 'Property value to match (required if key is provided)',
+      type: 'string | number | boolean',
+      required: false,
+    },
+  }}
+/>
+
+### Response
+
+<TypeTable
+  type={{
+    success: {
+      description: 'Whether the goal was created',
+      type: 'boolean',
+    },
+    goalId: {
+      description: 'ID of the created goal',
+      type: 'number',
+    },
+  }}
+/>
+
+</div>
+<div className="flex flex-col gap-4">
+
+<Tabs items={['cURL', 'JavaScript', 'Python']}>
+  <Tab value="cURL">
+```bash title="Path Goal"
+curl -X POST "https://api.rybbit.io/api/goal/create" \
+  -H "Authorization: Bearer your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "siteId": 123,
+    "name": "Checkout Complete",
+    "goalType": "path",
+    "config": {
+      "pathPattern": "/checkout/success"
+    }
+  }'
+```
+  </Tab>
+  <Tab value="JavaScript">
+```javascript title="Event Goal"
+const response = await fetch(
+  'https://api.rybbit.io/api/goal/create',
+  {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer your_api_key_here',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      siteId: 123,
+      name: 'Purchase Made',
+      goalType: 'event',
+      config: {
+        eventName: 'purchase',
+        eventPropertyKey: 'plan',
+        eventPropertyValue: 'pro'
+      }
+    })
+  }
+);
+
+const data = await response.json();
+```
+  </Tab>
+  <Tab value="Python">
+```python title="Request"
+import requests
+
+response = requests.post(
+    'https://api.rybbit.io/api/goal/create',
+    json={
+        'siteId': 123,
+        'name': 'Signup Complete',
+        'goalType': 'path',
+        'config': {
+            'pathPattern': '/signup/*'
+        }
+    },
+    headers={
+        'Authorization': 'Bearer your_api_key_here'
+    }
+)
+
+data = response.json()
+```
+  </Tab>
+</Tabs>
+
+```json title="Response"
+{
+  "success": true,
+  "goalId": 3
+}
+```
+
+</div>
+</div>
+
+---
+
+## Update Goal
+
+<div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<div>
+
+```
+PUT /api/goal/update
+```
+
+Updates an existing goal.
+
+### Request Body
+
+<TypeTable
+  type={{
+    goalId: {
+      description: 'ID of the goal to update',
+      type: 'number',
+      required: true,
+    },
+    siteId: {
+      description: 'Site ID the goal belongs to',
+      type: 'number',
+      required: true,
+    },
+    name: {
+      description: 'Updated goal name',
+      type: 'string',
+      required: false,
+    },
+    goalType: {
+      description: 'Type of goal',
+      type: 'string',
+      typeDescription: '"path" | "event"',
+      required: true,
+    },
+    config: {
+      description: 'Updated goal configuration',
+      type: 'GoalConfig',
+      required: true,
+    },
+  }}
+/>
+
+### Response
+
+<TypeTable
+  type={{
+    success: {
+      description: 'Whether the goal was updated',
+      type: 'boolean',
+    },
+    goalId: {
+      description: 'ID of the updated goal',
+      type: 'number',
+    },
+  }}
+/>
+
+</div>
+<div className="flex flex-col gap-4">
+
+<Tabs items={['cURL', 'JavaScript', 'Python']}>
+  <Tab value="cURL">
+```bash title="Request"
+curl -X PUT "https://api.rybbit.io/api/goal/update" \
+  -H "Authorization: Bearer your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "goalId": 1,
+    "siteId": 123,
+    "name": "Signup Completed (Updated)",
+    "goalType": "path",
+    "config": {
+      "pathPattern": "/signup/complete/*"
+    }
+  }'
+```
+  </Tab>
+  <Tab value="JavaScript">
+```javascript title="Request"
+const response = await fetch(
+  'https://api.rybbit.io/api/goal/update',
+  {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'Bearer your_api_key_here',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      goalId: 1,
+      siteId: 123,
+      name: 'Signup Completed (Updated)',
+      goalType: 'path',
+      config: {
+        pathPattern: '/signup/complete/*'
+      }
+    })
+  }
+);
+
+const data = await response.json();
+```
+  </Tab>
+  <Tab value="Python">
+```python title="Request"
+import requests
+
+response = requests.put(
+    'https://api.rybbit.io/api/goal/update',
+    json={
+        'goalId': 1,
+        'siteId': 123,
+        'name': 'Signup Completed (Updated)',
+        'goalType': 'path',
+        'config': {
+            'pathPattern': '/signup/complete/*'
+        }
+    },
+    headers={
+        'Authorization': 'Bearer your_api_key_here'
+    }
+)
+
+data = response.json()
+```
+  </Tab>
+</Tabs>
+
+```json title="Response"
+{
+  "success": true,
+  "goalId": 1
+}
+```
+
+</div>
+</div>
+
+---
+
+## Delete Goal
+
+<div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<div>
+
+```
+DELETE /api/goal/:goalId
+```
+
+Deletes a goal. This action cannot be undone.
+
+### Path Parameters
+
+<TypeTable
+  type={{
+    goalId: {
+      description: 'ID of the goal to delete',
+      type: 'string | number',
+      required: true,
+    },
+  }}
+/>
+
+### Response
+
+<TypeTable
+  type={{
+    success: {
+      description: 'Whether the goal was deleted',
+      type: 'boolean',
+    },
+  }}
+/>
+
+</div>
+<div className="flex flex-col gap-4">
+
+<Tabs items={['cURL', 'JavaScript', 'Python']}>
+  <Tab value="cURL">
+```bash title="Request"
+curl -X DELETE "https://api.rybbit.io/api/goal/1" \
+  -H "Authorization: Bearer your_api_key_here"
+```
+  </Tab>
+  <Tab value="JavaScript">
+```javascript title="Request"
+const response = await fetch(
+  'https://api.rybbit.io/api/goal/1',
+  {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'Bearer your_api_key_here'
+    }
+  }
+);
+
+const data = await response.json();
+```
+  </Tab>
+  <Tab value="Python">
+```python title="Request"
+import requests
+
+response = requests.delete(
+    'https://api.rybbit.io/api/goal/1',
+    headers={
+        'Authorization': 'Bearer your_api_key_here'
+    }
+)
+
+data = response.json()
+```
+  </Tab>
+</Tabs>
+
+```json title="Response"
+{
+  "success": true
+}
+```
+
+</div>
+</div>
