@@ -8,11 +8,16 @@ declare global {
         emit: (event: any) => void;
         checkoutEveryNms?: number;
         checkoutEveryNth?: number;
-        maskAllInputs?: boolean;
-        maskInputOptions?: any;
+        blockClass?: string | RegExp;
+        blockSelector?: string;
+        ignoreClass?: string | RegExp;
+        ignoreSelector?: string;
+        maskTextClass?: string | RegExp;
         maskTextSelector?: string;
-        slimDOMOptions?: any;
-        sampling?: any;
+        maskAllInputs?: boolean;
+        maskInputOptions?: Record<string, boolean>;
+        slimDOMOptions?: Record<string, boolean> | boolean;
+        sampling?: Record<string, any>;
         recordCanvas?: boolean;
         collectFonts?: boolean;
       }) => () => void;
@@ -70,6 +75,40 @@ export class SessionReplayRecorder {
     }
 
     try {
+      // Default sampling configuration (can be overridden via config)
+      const defaultSampling = {
+        // Aggressive sampling to reduce data volume
+        mousemove: false, // Don't record mouse moves at all
+        mouseInteraction: {
+          MouseUp: false,
+          MouseDown: false,
+          Click: true, // Only record clicks
+          ContextMenu: false,
+          DblClick: true,
+          Focus: true,
+          Blur: true,
+          TouchStart: false,
+          TouchEnd: false,
+        },
+        scroll: 500, // Sample scroll events every 500ms
+        input: "last", // Only record the final input value
+        media: 800, // Sample media interactions less frequently
+      };
+
+      // Default slimDOMOptions (can be overridden via config)
+      const defaultSlimDOMOptions = {
+        script: false,
+        comment: true,
+        headFavicon: true,
+        headWhitespace: true,
+        headMetaDescKeywords: true,
+        headMetaSocial: true,
+        headMetaRobots: true,
+        headMetaHttpEquiv: true,
+        headMetaAuthorship: true,
+        headMetaVerification: true,
+      };
+
       const recordingOptions: any = {
         emit: (event: any) => {
           this.addEvent({
@@ -78,45 +117,20 @@ export class SessionReplayRecorder {
             timestamp: event.timestamp || Date.now(),
           });
         },
-        recordCanvas: false, // Disable canvas recording to reduce data
-        collectFonts: true, // Disable font collection to reduce data
-        checkoutEveryNms: 60000, // Checkout every 60 seconds (was 30)
-        checkoutEveryNth: 500, // Checkout every 500 events (was 200)
-        maskAllInputs: true, // Mask all input values for privacy
-        maskInputOptions: {
-          password: true,
-          email: true,
-        },
-        slimDOMOptions: {
-          script: false,
-          comment: true,
-          headFavicon: true,
-          headWhitespace: true,
-          headMetaDescKeywords: true,
-          headMetaSocial: true,
-          headMetaRobots: true,
-          headMetaHttpEquiv: true,
-          headMetaAuthorship: true,
-          headMetaVerification: true,
-        },
-        sampling: {
-          // Aggressive sampling to reduce data volume
-          mousemove: false, // Don't record mouse moves at all
-          mouseInteraction: {
-            MouseUp: false,
-            MouseDown: false,
-            Click: true, // Only record clicks
-            ContextMenu: false,
-            DblClick: true,
-            Focus: true,
-            Blur: true,
-            TouchStart: false,
-            TouchEnd: false,
-          },
-          scroll: 500, // Sample scroll events every 500ms (was 150)
-          input: "last", // Only record the final input value
-          media: 800, // Sample media interactions less frequently
-        },
+        recordCanvas: false, // Always disabled to save disk space
+        checkoutEveryNms: 60000, // Checkout every 60 seconds
+        checkoutEveryNth: 500, // Checkout every 500 events
+        // Use config values with fallbacks to defaults
+        blockClass: this.config.sessionReplayBlockClass ?? 'rr-block',
+        blockSelector: this.config.sessionReplayBlockSelector ?? null,
+        ignoreClass: this.config.sessionReplayIgnoreClass ?? 'rr-ignore',
+        ignoreSelector: this.config.sessionReplayIgnoreSelector ?? null,
+        maskTextClass: this.config.sessionReplayMaskTextClass ?? 'rr-mask',
+        maskAllInputs: this.config.sessionReplayMaskAllInputs ?? true,
+        maskInputOptions: this.config.sessionReplayMaskInputOptions ?? { password: true, email: true },
+        collectFonts: this.config.sessionReplayCollectFonts ?? true,
+        sampling: this.config.sessionReplaySampling ?? defaultSampling,
+        slimDOMOptions: this.config.sessionReplaySlimDOMOptions ?? defaultSlimDOMOptions,
       };
 
       // Add custom text masking selectors if configured

@@ -84,6 +84,21 @@
     const debounceDuration = scriptTag.getAttribute("data-debounce") ? Math.max(0, parseInt(scriptTag.getAttribute("data-debounce"))) : 500;
     const sessionReplayBatchSize = scriptTag.getAttribute("data-replay-batch-size") ? Math.max(1, parseInt(scriptTag.getAttribute("data-replay-batch-size"))) : 250;
     const sessionReplayBatchInterval = scriptTag.getAttribute("data-replay-batch-interval") ? Math.max(1e3, parseInt(scriptTag.getAttribute("data-replay-batch-interval"))) : 5e3;
+    const sessionReplayBlockClass = scriptTag.getAttribute("data-replay-block-class") || void 0;
+    const sessionReplayBlockSelector = scriptTag.getAttribute("data-replay-block-selector") || void 0;
+    const sessionReplayIgnoreClass = scriptTag.getAttribute("data-replay-ignore-class") || void 0;
+    const sessionReplayIgnoreSelector = scriptTag.getAttribute("data-replay-ignore-selector") || void 0;
+    const sessionReplayMaskTextClass = scriptTag.getAttribute("data-replay-mask-text-class") || void 0;
+    const maskAllInputsAttr = scriptTag.getAttribute("data-replay-mask-all-inputs");
+    const sessionReplayMaskAllInputs = maskAllInputsAttr !== null ? maskAllInputsAttr !== "false" : void 0;
+    const maskInputOptionsAttr = scriptTag.getAttribute("data-replay-mask-input-options");
+    const sessionReplayMaskInputOptions = maskInputOptionsAttr ? parseJsonSafely(maskInputOptionsAttr, { password: true, email: true }) : void 0;
+    const collectFontsAttr = scriptTag.getAttribute("data-replay-collect-fonts");
+    const sessionReplayCollectFonts = collectFontsAttr !== null ? collectFontsAttr !== "false" : void 0;
+    const samplingAttr = scriptTag.getAttribute("data-replay-sampling");
+    const sessionReplaySampling = samplingAttr ? parseJsonSafely(samplingAttr, {}) : void 0;
+    const slimDOMAttr = scriptTag.getAttribute("data-replay-slim-dom-options");
+    const sessionReplaySlimDOMOptions = slimDOMAttr ? parseJsonSafely(slimDOMAttr, {}) : void 0;
     const defaultConfig = {
       analyticsHost,
       siteId,
@@ -100,7 +115,18 @@
       trackOutbound: true,
       enableWebVitals: false,
       trackErrors: false,
-      enableSessionReplay: false
+      enableSessionReplay: false,
+      // rrweb session replay options (undefined means use rrweb defaults)
+      sessionReplayBlockClass,
+      sessionReplayBlockSelector,
+      sessionReplayIgnoreClass,
+      sessionReplayIgnoreSelector,
+      sessionReplayMaskTextClass,
+      sessionReplayMaskAllInputs,
+      sessionReplayMaskInputOptions,
+      sessionReplayCollectFonts,
+      sessionReplaySampling,
+      sessionReplaySlimDOMOptions
     };
     try {
       const configUrl = `${analyticsHost}/site/tracking-config/${siteId}`;
@@ -169,6 +195,41 @@
         return;
       }
       try {
+        const defaultSampling = {
+          // Aggressive sampling to reduce data volume
+          mousemove: false,
+          // Don't record mouse moves at all
+          mouseInteraction: {
+            MouseUp: false,
+            MouseDown: false,
+            Click: true,
+            // Only record clicks
+            ContextMenu: false,
+            DblClick: true,
+            Focus: true,
+            Blur: true,
+            TouchStart: false,
+            TouchEnd: false
+          },
+          scroll: 500,
+          // Sample scroll events every 500ms
+          input: "last",
+          // Only record the final input value
+          media: 800
+          // Sample media interactions less frequently
+        };
+        const defaultSlimDOMOptions = {
+          script: false,
+          comment: true,
+          headFavicon: true,
+          headWhitespace: true,
+          headMetaDescKeywords: true,
+          headMetaSocial: true,
+          headMetaRobots: true,
+          headMetaHttpEquiv: true,
+          headMetaAuthorship: true,
+          headMetaVerification: true
+        };
         const recordingOptions = {
           emit: (event) => {
             this.addEvent({
@@ -178,54 +239,22 @@
             });
           },
           recordCanvas: false,
-          // Disable canvas recording to reduce data
-          collectFonts: true,
-          // Disable font collection to reduce data
+          // Always disabled to save disk space
           checkoutEveryNms: 6e4,
-          // Checkout every 60 seconds (was 30)
+          // Checkout every 60 seconds
           checkoutEveryNth: 500,
-          // Checkout every 500 events (was 200)
-          maskAllInputs: true,
-          // Mask all input values for privacy
-          maskInputOptions: {
-            password: true,
-            email: true
-          },
-          slimDOMOptions: {
-            script: false,
-            comment: true,
-            headFavicon: true,
-            headWhitespace: true,
-            headMetaDescKeywords: true,
-            headMetaSocial: true,
-            headMetaRobots: true,
-            headMetaHttpEquiv: true,
-            headMetaAuthorship: true,
-            headMetaVerification: true
-          },
-          sampling: {
-            // Aggressive sampling to reduce data volume
-            mousemove: false,
-            // Don't record mouse moves at all
-            mouseInteraction: {
-              MouseUp: false,
-              MouseDown: false,
-              Click: true,
-              // Only record clicks
-              ContextMenu: false,
-              DblClick: true,
-              Focus: true,
-              Blur: true,
-              TouchStart: false,
-              TouchEnd: false
-            },
-            scroll: 500,
-            // Sample scroll events every 500ms (was 150)
-            input: "last",
-            // Only record the final input value
-            media: 800
-            // Sample media interactions less frequently
-          }
+          // Checkout every 500 events
+          // Use config values with fallbacks to defaults
+          blockClass: this.config.sessionReplayBlockClass ?? "rr-block",
+          blockSelector: this.config.sessionReplayBlockSelector ?? null,
+          ignoreClass: this.config.sessionReplayIgnoreClass ?? "rr-ignore",
+          ignoreSelector: this.config.sessionReplayIgnoreSelector ?? null,
+          maskTextClass: this.config.sessionReplayMaskTextClass ?? "rr-mask",
+          maskAllInputs: this.config.sessionReplayMaskAllInputs ?? true,
+          maskInputOptions: this.config.sessionReplayMaskInputOptions ?? { password: true, email: true },
+          collectFonts: this.config.sessionReplayCollectFonts ?? true,
+          sampling: this.config.sessionReplaySampling ?? defaultSampling,
+          slimDOMOptions: this.config.sessionReplaySlimDOMOptions ?? defaultSlimDOMOptions
         };
         if (this.config.sessionReplayMaskTextSelectors && this.config.sessionReplayMaskTextSelectors.length > 0) {
           recordingOptions.maskTextSelector = this.config.sessionReplayMaskTextSelectors.join(", ");

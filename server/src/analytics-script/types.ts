@@ -14,6 +14,17 @@ export interface ScriptConfig {
   sessionReplayMaskTextSelectors: string[];
   skipPatterns: string[];
   maskPatterns: string[];
+  // Session replay rrweb options
+  sessionReplayBlockClass?: string;
+  sessionReplayBlockSelector?: string;
+  sessionReplayIgnoreClass?: string;
+  sessionReplayIgnoreSelector?: string;
+  sessionReplayMaskTextClass?: string;
+  sessionReplayMaskAllInputs?: boolean;
+  sessionReplayMaskInputOptions?: Record<string, boolean>;
+  sessionReplayCollectFonts?: boolean;
+  sessionReplaySampling?: Record<string, any>;
+  sessionReplaySlimDOMOptions?: Record<string, boolean> | boolean;
 }
 
 export interface BasePayload {
