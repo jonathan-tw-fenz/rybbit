@@ -209,7 +209,7 @@ export function FunnelForm({
 
   if (steps.some(step => !step.value)) {
     funnelArea = (
-      <div className="flex items-center justify-center bg-neutral-50 dark:bg-neutral-900 rounded-lg h-full">
+      <div className="flex items-center justify-center rounded-lg h-full">
         <div className="text-center p-6">
           <div className="text-lg font-medium mb-2">
             {/* Funnel Preview */}
@@ -226,7 +226,7 @@ export function FunnelForm({
 
   if (isPending) {
     funnelArea = (
-      <div className="flex items-center justify-center bg-neutral-50 dark:bg-neutral-900 rounded-lg h-full">
+      <div className="flex items-center justify-center rounded-lg h-full">
         <ThreeDotLoader />
       </div>
     );
