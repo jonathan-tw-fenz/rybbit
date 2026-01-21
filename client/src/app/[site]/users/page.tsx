@@ -9,7 +9,7 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { getTimezone } from "@/lib/store";
+import { addFilter, getTimezone } from "@/lib/store";
 import { ArrowDown, ArrowUp, ArrowUpDown, Monitor, Smartphone, Tablet } from "lucide-react";
 import { DateTime } from "luxon";
 import Link from "next/link";
@@ -31,6 +31,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/
 import { Info } from "lucide-react";
 import { useSetPageTitle } from "../../../hooks/useSetPageTitle";
 import { USER_PAGE_FILTERS } from "../../../lib/filterGroups";
+import { FilterParameter } from "@rybbit/shared";
 import { getCountryName, getUserDisplayName } from "../../../lib/utils";
 import { Browser } from "../components/shared/icons/Browser";
 import { CountryFlag } from "../components/shared/icons/CountryFlag";
@@ -39,6 +40,17 @@ import { SubHeader } from "../components/SubHeader/SubHeader";
 
 // Set up column helper
 const columnHelper = createColumnHelper<UsersResponse>();
+
+// Helper to add filter on click
+const handleFilterClick = (e: React.MouseEvent, parameter: FilterParameter, value: string | undefined) => {
+  e.stopPropagation();
+  if (!value) return;
+  addFilter({
+    parameter,
+    value: [value],
+    type: "equals",
+  });
+};
 
 // Create a reusable sort header component
 const SortHeader = ({ column, children }: any) => {
@@ -136,18 +148,22 @@ export default function UsersPage() {
       // header: "Country",
       header: "国家",
       cell: info => {
+        const country = info.getValue();
         return (
-          <div className="flex items-center gap-2 whitespace-nowrap">
+          <div
+            className="flex items-center gap-2 whitespace-nowrap cursor-pointer hover:opacity-70"
+            onClick={e => handleFilterClick(e, "country", country)}
+          >
             <Tooltip>
               <TooltipTrigger asChild>
-                <CountryFlag country={info.getValue() || ""} />
+                <CountryFlag country={country || ""} />
               </TooltipTrigger>
               <TooltipContent>
                 {/* <p>{info.getValue() ? getCountryName(info.getValue()) : "Unknown"}</p> */}
                 <p>{info.getValue() ? getCountryName(info.getValue()) : "未知"}</p>
               </TooltipContent>
             </Tooltip>
-            {info.row.original.city || info.row.original.region || getCountryName(info.getValue())}
+            {info.row.original.city || info.row.original.region || getCountryName(country)}
           </div>
         );
       },
@@ -163,7 +179,10 @@ export default function UsersPage() {
         if (domain) {
           const displayName = getDisplayName(domain);
           return (
-            <div className="flex items-center gap-2">
+            <div
+              className="flex items-center gap-2 cursor-pointer hover:opacity-70"
+              onClick={e => handleFilterClick(e, "channel", channel)}
+            >
               <Favicon domain={domain} className="w-4 h-4" />
               <span>{displayName}</span>
             </div>
@@ -171,7 +190,10 @@ export default function UsersPage() {
         }
 
         return (
-          <div className="flex items-center gap-2">
+          <div
+            className="flex items-center gap-2 cursor-pointer hover:opacity-70"
+            onClick={e => handleFilterClick(e, "channel", channel)}
+          >
             <ChannelIcon channel={channel} />
             <span>{channel}</span>
           </div>
@@ -181,24 +203,34 @@ export default function UsersPage() {
     columnHelper.accessor("browser", {
       // header: "Browser",
       header: "浏览器",
-      cell: info => (
-        <div className="flex items-center gap-2 whitespace-nowrap">
-          {/* <Browser browser={info.getValue() || "Unknown"} />
-          {info.getValue() || "Unknown"} */}
-          <Browser browser={info.getValue() || "未知"} />
-          {info.getValue() || "未知"}
-        </div>
-      ),
+      cell: info => {
+        const browser = info.getValue();
+        return (
+          <div
+            className="flex items-center gap-2 whitespace-nowrap cursor-pointer hover:opacity-70"
+            onClick={e => handleFilterClick(e, "browser", browser)}
+          >
+            <Browser browser={browser || "Unknown"} />
+            {browser || "未知"}
+          </div>
+        );
+      },
     }),
     columnHelper.accessor("operating_system", {
       header: "OS",
-      cell: info => (
-        <div className="flex items-center gap-2 whitespace-nowrap">
-          <OperatingSystem os={info.getValue() || ""} />
-          {/* {info.getValue() || "Unknown"} */}
-          {info.getValue() || "未知"}
-        </div>
-      ),
+      cell: info => {
+        const os = info.getValue();
+        return (
+          <div
+            className="flex items-center gap-2 whitespace-nowrap cursor-pointer hover:opacity-70"
+            onClick={e => handleFilterClick(e, "operating_system", os)}
+          >
+            <OperatingSystem os={os || ""} />
+            {/* {os || "Unknown"} */}
+            {os || "未知"}
+          </div>
+        );
+      },
     }),
     columnHelper.accessor("device_type", {
       // header: "Device",
@@ -206,7 +238,10 @@ export default function UsersPage() {
       cell: info => {
         const deviceType = info.getValue();
         return (
-          <div className="flex items-center gap-2 whitespace-nowrap">
+          <div
+            className="flex items-center gap-2 whitespace-nowrap cursor-pointer hover:opacity-70"
+            onClick={e => handleFilterClick(e, "device_type", deviceType)}
+          >
             {deviceType === "Desktop" && <Monitor className="w-4 h-4" />}
             {deviceType === "Mobile" && <Smartphone className="w-4 h-4" />}
             {deviceType === "Tablet" && <Tablet className="w-4 h-4" />}
