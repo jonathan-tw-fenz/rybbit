@@ -1,10 +1,12 @@
-import { ChevronLeft, ChevronRight, Rewind } from "lucide-react";
+import { ChevronLeft, ChevronRight, Info, Rewind } from "lucide-react";
 import { GetSessionsResponse } from "../../api/analytics/endpoints";
 import { NothingFound } from "../NothingFound";
 import { Button } from "../ui/button";
 import { SessionCard, SessionCardSkeleton } from "./SessionCard";
 import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import Link from "next/link";
 
 interface SessionsListProps {
   sessions: GetSessionsResponse;
@@ -34,15 +36,6 @@ export function SessionsList({
   setIdentifiedOnly,
   pageSize,
 }: SessionsListProps) {
-  if (sessions.length === 0 && !isLoading) {
-    return (
-      <div className="space-y-3">
-        {/* <NothingFound icon={<Rewind className="w-10 h-10" />} title={"No sessions found"} description={emptyMessage} /> */}
-        <NothingFound icon={<Rewind className="w-10 h-10" />} title={"无工作阶段"} description={emptyMessage} />
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-3">
       {/* Pagination controls */}
@@ -54,6 +47,16 @@ export function SessionsList({
               {/* Identified only */}
               限会员
             </Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="https://www.rybbit.io/docs/identify-users" target="_blank">
+                  <Info className="h-4 w-4 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 cursor-pointer" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Learn how to identify users</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         )}
         <div className="flex items-center justify-end gap-2">
@@ -67,6 +70,10 @@ export function SessionsList({
           </Button>
         </div>
       </div>
+
+      {sessions.length === 0 && !isLoading && (
+        <NothingFound icon={<Rewind className="w-10 h-10" />} title={"No sessions found"} description={emptyMessage} />
+      )}
 
       {/* Session cards */}
       {isLoading ? (
