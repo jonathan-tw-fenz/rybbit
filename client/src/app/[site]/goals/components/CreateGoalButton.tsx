@@ -16,7 +16,8 @@ export default function CreateGoalButton({ siteId }: CreateGoalButtonProps) {
         trigger={
           <Button className="flex items-center gap-1">
             <Plus className="h-4 w-4" />
-            <span>Add Goal</span>
+            {/* <span>Add Goal</span> */}
+            <span>新增目標</span>
           </Button>
         }
       />

@@ -142,7 +142,8 @@ export default function GoalsPage() {
         <SubHeader availableFilters={GOALS_PAGE_FILTERS} />
         <div className="flex items-center justify-between">
           <Input
-            placeholder="Filter goals"
+            // placeholder="Filter goals"
+            placeholder="目标筛选"
             className="w-48"
             isSearch
             value={searchQuery}
@@ -162,15 +163,19 @@ export default function GoalsPage() {
         ) : !goalsData || goalsData.data.length === 0 ? (
           <NothingFound
             icon={<Target className="w-10 h-10" />}
-            title={"No goals found"}
-            description={"Create your first conversion goal to start tracking important user actions."}
+            // title={"No goals found"}
+            // description={"Create your first conversion goal to start tracking important user actions."}
+            title={"无目标"}
+            description={"创建第一个转换目标，开始追踪重要使用者行为"}
             action={<CreateGoalButton siteId={Number(site)} />}
           />
         ) : filteredGoals.length === 0 ? (
           <NothingFound
             icon={<Target className="w-10 h-10" />}
-            title={"No goals found"}
-            description={`No goals match "${searchQuery}"`}
+            // title={"No goals found"}
+            // description={`No goals match "${searchQuery}"`}
+            title={"无目标"}
+            description={`没有目标符合"${searchQuery}"`}
           />
         ) : (
           <div className="space-y-6">
@@ -183,7 +188,7 @@ export default function GoalsPage() {
                 pagination={pagination}
                 setPagination={setPagination}
                 isLoading={isLoading}
-                itemName="goals"
+                itemName="目标"
               />
             )}
           </div>

@@ -49,7 +49,8 @@ export function SessionsList({
           <div className="flex items-center justify-end gap-2">
             <Switch id="identified-only" checked={identifiedOnly} onCheckedChange={setIdentifiedOnly} />
             <Label htmlFor="identified-only" className="text-sm text-neutral-600 dark:text-neutral-400 cursor-pointer">
-              Identified only
+              {/* Identified only */}
+              限会员
             </Label>
           </div>
         )}
@@ -57,7 +58,8 @@ export function SessionsList({
           <Button variant="ghost" size="smIcon" onClick={() => onPageChange(page - 1)} disabled={!hasPrevPage}>
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">Page {page}</span>
+          {/* <span className="text-sm text-neutral-500 dark:text-neutral-400">Page {page}</span> */}
+          <span className="text-sm text-neutral-500 dark:text-neutral-400">第{page}页</span>
           <Button variant="ghost" size="smIcon" onClick={() => onPageChange(page + 1)} disabled={!hasNextPage}>
             <ChevronRight className="h-4 w-4" />
           </Button>

@@ -70,7 +70,8 @@ export function ReplayDrawer({ sessionId, open, onOpenChange }: ReplayDrawerProp
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent className="h-[90vh]">
         <VisuallyHidden>
-          <DrawerTitle>Session Replay</DrawerTitle>
+          {/* <DrawerTitle>Session Replay</DrawerTitle> */}
+          <DrawerTitle>工作阶段重播</DrawerTitle>
         </VisuallyHidden>
         <div className="flex gap-2 p-2 h-[97%]">
           {/* Player */}

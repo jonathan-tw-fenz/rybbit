@@ -83,7 +83,8 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
                     <PageviewIcon />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Page Goal</p>
+                    {/* <p>Page Goal</p> */}
+                    <p>页面目标</p>
                   </TooltipContent>
                 </Tooltip>
               ) : (
@@ -92,7 +93,8 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
                     <EventIcon />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Event Goal</p>
+                    {/* <p>Event Goal</p> */}
+                    <p>事件目标</p>
                   </TooltipContent>
                 </Tooltip>
               )}
@@ -100,14 +102,18 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
             </h3>
 
             <div className="mt-1">
-              <span className="text-xs text-neutral-500 dark:text-neutral-400 mr-2">Pattern:</span>
+              <span className="text-xs text-neutral-500 dark:text-neutral-400 mr-2">
+                {/* Pattern: */}
+                样式:
+              </span>
               <code className="text-xs bg-neutral-100 dark:bg-neutral-800 px-1 py-0.5 rounded">
                 {goal.goalType === "path" ? goal.config.pathPattern : goal.config.eventName}
               </code>
 
               {goal.goalType === "event" && goal.config.eventPropertyKey && (
                 <div className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-                  Property:{" "}
+                  {/* Property:{" "} */}
+                  属性:{" "}
                   <code className="text-xs bg-neutral-100 dark:bg-neutral-800 px-1 py-0.5 rounded text-neutral-900 dark:text-neutral-100">
                     {goal.config.eventPropertyKey}: {String(goal.config.eventPropertyValue)}
                   </code>
@@ -121,11 +127,17 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center">
                 <div className="font-bold text-base">{goal.total_conversions.toLocaleString()}</div>
-                <div className="text-xs text-neutral-500 dark:text-neutral-400">Conversions</div>
+                <div className="text-xs text-neutral-500 dark:text-neutral-400">
+                  {/* Conversions */}
+                  转换数
+                </div>
               </div>
               <div className="text-center">
                 <div className="font-bold text-base">{(goal.conversion_rate * 100).toFixed(2)}%</div>
-                <div className="text-xs text-neutral-500 dark:text-neutral-400">Conversion Rate</div>
+                <div className="text-xs text-neutral-500 dark:text-neutral-400">
+                  {/* Conversion Rate */}
+                  转换率
+                </div>
               </div>
             </div>
           </div>
@@ -143,7 +155,10 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
                         <Edit className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>Edit Goal</TooltipContent>
+                    <TooltipContent>
+                      {/* Edit Goal */}
+                      编辑目标
+                    </TooltipContent>
                   </Tooltip>
                 }
               />
@@ -160,7 +175,10 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
                         <Copy className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>Clone Goal</TooltipContent>
+                    <TooltipContent>
+                      {/* Clone Goal */}
+                      复制目标
+                    </TooltipContent>
                   </Tooltip>
                 }
               />
@@ -178,7 +196,10 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Delete Goal</TooltipContent>
+              <TooltipContent>
+                {/* Delete Goal */}
+                删除目标
+              </TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -203,7 +224,10 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
         {/* Expanded Sessions Section */}
         {isExpanded && (
           <div className="border-t border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 p-4">
-            <h4 className="text-sm font-medium text-neutral-700 dark:text-neutral-200 mb-3">Converted Sessions</h4>
+            <h4 className="text-sm font-medium text-neutral-700 dark:text-neutral-200 mb-3">
+              {/* Converted Sessions */}
+              转换工作阶段
+            </h4>
             <SessionsList
               sessions={sessions}
               isLoading={isLoadingSessions}
@@ -211,7 +235,8 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
               onPageChange={setPage}
               hasNextPage={hasNextPage}
               hasPrevPage={hasPrevPage}
-              emptyMessage="No sessions converted to this goal in the selected time period."
+              // emptyMessage="No sessions converted to this goal in the selected time period."
+              emptyMessage="此时段没有完成转换的工作阶段"
             />
           </div>
         )}
@@ -221,15 +246,20 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure you want to delete this goal?</AlertDialogTitle>
+            <AlertDialogTitle>
+              {/* Are you sure you want to delete this goal? */}
+              确定要删除目标？
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the goal and remove it from all reports.
+              {/* This action cannot be undone. This will permanently delete the goal and remove it from all reports. */}
+              此动作无法取消，一但目标被删除该目标将永远从报表中移除
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} variant="destructive">
-              {deleteGoalMutation.isPending ? "Deleting..." : "Delete"}
+              {/* {deleteGoalMutation.isPending ? "Deleting..." : "Delete"} */}
+              {deleteGoalMutation.isPending ? "删除中..." : "删除"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

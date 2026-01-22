@@ -119,7 +119,8 @@ function PageviewItem({
                 </div>
               </Link>
             ) : (
-              <div className="text-sm truncate">{item.event_name || "Outbound Click"}</div>
+              // <div className="text-sm truncate">{item.event_name || "Outbound Click"}</div>
+              <div className="text-sm truncate">{item.event_name || "外部跳转"}</div>
             )}
           </div>
 
@@ -170,7 +171,10 @@ function PageviewItem({
                       variant="outline"
                       className="px-1.5 py-0 h-5 text-xs bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium"
                     >
-                      <span className="text-neutral-600 dark:text-neutral-300 font-light mr-1">text:</span>{" "}
+                      <span className="text-neutral-600 dark:text-neutral-300 font-light mr-1">
+                        {/* text: */}
+                        文字:
+                      </span>{" "}
                       {String(item.props.text)}
                     </Badge>
                   ) : null}
@@ -179,7 +183,10 @@ function PageviewItem({
                       variant="outline"
                       className="px-1.5 py-0 h-5 text-xs bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium"
                     >
-                      <span className="text-neutral-600 dark:text-neutral-300 font-light mr-1">target:</span>{" "}
+                      <span className="text-neutral-600 dark:text-neutral-300 font-light mr-1">
+                        {/* target: */}
+                        目标:
+                      </span>{" "}
                       {String(item.props.target)}
                     </Badge>
                   ) : null}
@@ -313,14 +320,23 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
         <SessionDetailsTimelineSkeleton itemCount={session.pageviews + session.events} />
       ) : error ? (
         <Alert variant="destructive" className="mt-4">
-          <AlertDescription>Error loading session details. Please try again.</AlertDescription>
+          <AlertDescription>
+            {/* Error loading session details. Please try again. */}
+            载入工作阶段详细资料发生错误，请稍后再试
+          </AlertDescription>
         </Alert>
       ) : sessionDetailsData?.pages[0]?.data ? (
         <Tabs defaultValue="timeline" className="mt-4">
           <div className="flex justify-between items-center mb-6">
             <TabsList>
-              <TabsTrigger value="timeline">Timeline</TabsTrigger>
-              <TabsTrigger value="info">Session Info</TabsTrigger>
+              <TabsTrigger value="timeline">
+                {/* Timeline */}
+                时间轴
+              </TabsTrigger>
+              <TabsTrigger value="info">
+                {/* Session Info */}
+                工作阶段资料
+              </TabsTrigger>
             </TabsList>
             {!userId && (
               <Link
@@ -329,7 +345,8 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                 )}`}
               >
                 <Button size={"sm"} variant={"success"}>
-                  View User <ArrowRight className="w-4 h-4" />
+                  {/* View User <ArrowRight className="w-4 h-4" /> */}
+                  检视使用者 <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
             )}
@@ -369,10 +386,12 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                     {isFetchingNextPage ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>Loading...</span>
+                        {/* <span>Loading...</span> */}
+                        <span>载入中...</span>
                       </>
                     ) : (
-                      <span>Load More</span>
+                      // <span>Load More</span>
+                      <span>载入更多</span>
                     )}
                   </Button>
                 </div>
@@ -380,7 +399,8 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
 
               {sessionDetailsData.pages[0]?.data?.pagination?.total > 0 && (
                 <div className="text-center text-xs text-neutral-400 dark:text-neutral-500 mt-2">
-                  Showing {allEvents.length} of {sessionDetailsData.pages[0]?.data?.pagination?.total} events
+                  {/* Showing {allEvents.length} of {sessionDetailsData.pages[0]?.data?.pagination?.total} events */}
+                  显示{allEvents.length}个事件，共{sessionDetailsData.pages[0]?.data?.pagination?.total}个事件
                 </div>
               )}
             </div>
@@ -391,7 +411,8 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
               {/* User Information */}
               <div>
                 <h4 className="text-sm font-medium mb-3 text-neutral-600 dark:text-neutral-300 border-b border-neutral-100 dark:border-neutral-800 pb-2">
-                  User Information
+                  {/* User Information */}
+                  使用者资料
                 </h4>
                 <div className="space-y-3">
                   {sessionDetails?.user_id && (
@@ -426,7 +447,8 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                     {sessionDetails?.language && (
                       <div className="text-sm flex items-center gap-2">
                         <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
-                          Language:
+                          {/* Language: */}
+                          语言:
                         </span>
                         <span className="text-neutral-500 dark:text-neutral-400">
                           {sessionDetails.language ? getLanguageName(sessionDetails.language) : "N/A"}
@@ -437,7 +459,8 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                     {sessionDetails?.country && (
                       <div className="flex items-center gap-2 text-sm">
                         <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
-                          Country:
+                          {/* Country: */}
+                          国家:
                         </span>
                         <div className="flex items-center gap-1 text-neutral-500 dark:text-neutral-400">
                           <CountryFlag country={sessionDetails.country} />
@@ -448,7 +471,10 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                     )}
                     {sessionDetails?.region && getRegionName(sessionDetails.region) && (
                       <div className="flex items-center gap-2 text-sm">
-                        <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">Region:</span>
+                        <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                          {/* Region: */}
+                          地区:
+                        </span>
                         <span className="text-neutral-500 dark:text-neutral-400">
                           {getRegionName(sessionDetails.region)}
                         </span>
@@ -456,7 +482,10 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                     )}
                     {sessionDetails?.city && (
                       <div className="flex items-center gap-2 text-sm">
-                        <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">City:</span>
+                        <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                          {/* City: */}
+                          城市:
+                        </span>
                         <span className="text-neutral-500 dark:text-neutral-400">{sessionDetails.city}</span>
                       </div>
                     )}
@@ -467,11 +496,15 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
               {/* Device Information */}
               <div>
                 <h4 className="text-sm font-medium mb-3 text-neutral-600 dark:text-neutral-300 border-b border-neutral-100 dark:border-neutral-800 pb-2">
-                  Device Information
+                  {/* Device Information */}
+                  装置资料
                 </h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">Device:</span>
+                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                      {/* Device: */}
+                      装置:
+                    </span>
                     <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400">
                       {sessionDetails?.device_type === "Desktop" && <Monitor className="w-4 h-4" />}
                       {sessionDetails?.device_type === "Mobile" && <Smartphone className="w-4 h-4" />}
@@ -481,7 +514,10 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                   </div>
 
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">Browser:</span>
+                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                      {/* Browser: */}
+                      浏览器:
+                    </span>
                     <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400">
                       <Browser browser={sessionDetails?.browser || "Unknown"} />
                       <span>
@@ -508,7 +544,10 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
 
                   {sessionDetails?.screen_width && sessionDetails?.screen_height ? (
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">Screen:</span>
+                      <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                        {/* Screen: */}
+                        萤幕大小
+                      </span>
                       <span className="text-neutral-500 dark:text-neutral-400">
                         {sessionDetails.screen_width} × {sessionDetails.screen_height}
                       </span>
@@ -526,27 +565,40 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
               {/* Source Information */}
               <div>
                 <h4 className="text-sm font-medium mb-3 text-neutral-600 dark:text-neutral-300 border-b border-neutral-100 dark:border-neutral-800 pb-2">
-                  Source Information
+                  {/* Source Information */}
+                  来源资料
                 </h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">Channel:</span>
+                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                      {/* Channel: */}
+                      渠道:
+                    </span>
                     <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400">
-                      <span>{sessionDetails?.channel || "None"}</span>
+                      {/* <span>{sessionDetails?.channel || "None"}</span> */}
+                      <span>{sessionDetails?.channel || "无"}</span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">Referrer:</span>
+                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                      {/* Referrer: */}
+                      参照来源:
+                    </span>
                     <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400">
-                      <span>{sessionDetails?.referrer || "None"}</span>
+                      {/* <span>{sessionDetails?.referrer || "None"}</span> */}
+                      <span>{sessionDetails?.referrer || "无"}</span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">Entry Page:</span>
+                    <span className="font-medium text-neutral-600 dark:text-neutral-300 min-w-[80px]">
+                      {/* Entry Page: */}
+                      入口页面
+                    </span>
                     <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400">
-                      <span>{sessionDetails?.entry_page || "None"}</span>
+                      {/* <span>{sessionDetails?.entry_page || "None"}</span> */}
+                      <span>{sessionDetails?.entry_page || "无"}</span>
                     </div>
                   </div>
                 </div>
@@ -555,7 +607,10 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
           </TabsContent>
         </Tabs>
       ) : (
-        <div className="py-4 text-center text-neutral-400">No data available</div>
+        <div className="py-4 text-center text-neutral-400">
+          {/* No data available */}
+          无资料
+        </div>
       )}
     </div>
   );
