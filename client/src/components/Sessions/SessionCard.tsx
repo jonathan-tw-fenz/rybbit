@@ -126,7 +126,8 @@ export function SessionCard({ session, onClick, userId, expandedByDefault }: Ses
                     <Video className="w-4 h-4" />
                   </Badge>
                 </TooltipTrigger>
-                <TooltipContent>Watch Session Replay</TooltipContent>
+                {/* <TooltipContent>Watch Session Replay</TooltipContent> */}
+                <TooltipContent>观看工作阶段重播</TooltipContent>
               </Tooltip>
             )}
             <Tooltip>
@@ -136,7 +137,8 @@ export function SessionCard({ session, onClick, userId, expandedByDefault }: Ses
                   <span>{formatter(session.pageviews)}</span>
                 </Badge>
               </TooltipTrigger>
-              <TooltipContent>Pageviews</TooltipContent>
+              {/* <TooltipContent>Pageviews</TooltipContent> */}
+              <TooltipContent>观看数</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -145,7 +147,8 @@ export function SessionCard({ session, onClick, userId, expandedByDefault }: Ses
                   <span>{formatter(session.events)}</span>
                 </Badge>
               </TooltipTrigger>
-              <TooltipContent>Events</TooltipContent>
+              {/* <TooltipContent>Events</TooltipContent> */}
+              <TooltipContent>事件数</TooltipContent>
             </Tooltip>
             <Channel
               channel={session.channel}
