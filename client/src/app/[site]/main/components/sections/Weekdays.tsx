@@ -124,17 +124,23 @@ export function Weekdays() {
   const getMetricDisplayName = (metric: StatType): string => {
     switch (metric) {
       case "users":
-        return "Unique Visitors";
+        // return "Unique Visitors";
+        return "独特使用者";
       case "pageviews":
-        return "Pageviews";
+        // return "Pageviews";
+        return "造访页面数";
       case "sessions":
-        return "Sessions";
+        // return "Sessions";
+        return "工作阶段";
       case "bounce_rate":
-        return "Bounce Rate";
+        // return "Bounce Rate";
+        return "跳出率";
       case "pages_per_session":
-        return "Pages per Session";
+        // return "Pages per Session";
+        return "工作阶段平均页面数";
       case "session_duration":
-        return "Session Duration";
+        // return "Session Duration";
+        return "工作阶段长度";
       default:
         return metric;
     }
@@ -147,7 +153,10 @@ export function Weekdays() {
         <div className="flex flex-row items-center justify-between">
           <Tabs defaultValue="pages" value={"pages"}>
             <TabsList>
-              <TabsTrigger value="pages">Weekly Trends</TabsTrigger>
+              <TabsTrigger value="pages">
+                {/* Weekly Trends */}
+                本週趨勢
+              </TabsTrigger>
             </TabsList>
           </Tabs>
 
@@ -156,12 +165,30 @@ export function Weekdays() {
               <SelectValue placeholder="Select metric" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="users">Unique Visitors</SelectItem>
-              <SelectItem value="pageviews">Pageviews</SelectItem>
-              <SelectItem value="sessions">Sessions</SelectItem>
-              <SelectItem value="bounce_rate">Bounce Rate</SelectItem>
-              <SelectItem value="pages_per_session">Pages per Session</SelectItem>
-              <SelectItem value="session_duration">Session Duration</SelectItem>
+              <SelectItem value="users">
+                {/* Unique Visitors */}
+                独特使用者
+              </SelectItem>
+              <SelectItem value="pageviews">
+                {/* Pageviews */}
+                造访页面数
+              </SelectItem>
+              <SelectItem value="sessions">
+                {/* Sessions */}
+                工作阶段
+              </SelectItem>
+              <SelectItem value="bounce_rate">
+                {/* Bounce Rate */}
+                跳出率
+              </SelectItem>
+              <SelectItem value="pages_per_session">
+                {/* Pages per Session */}
+                工作阶段平均页面数
+              </SelectItem>
+              <SelectItem value="session_duration">
+                {/* Session Duration */}
+                工作阶段长度
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>

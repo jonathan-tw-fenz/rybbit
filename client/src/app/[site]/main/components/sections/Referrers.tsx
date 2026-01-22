@@ -30,8 +30,14 @@ export function Referrers() {
           <div className="flex flex-row gap-2 justify-between items-center">
             <div className="overflow-x-auto">
               <TabsList>
-                <TabsTrigger value="referrers">Referrers</TabsTrigger>
-                <TabsTrigger value="channels">Channels</TabsTrigger>
+                <TabsTrigger value="referrers">
+                  {/* Referrers */}
+                  参照来源
+                </TabsTrigger>
+                <TabsTrigger value="channels">
+                  {/* Channels */}
+                  渠道
+                </TabsTrigger>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild unstyled>
                     <div
@@ -41,20 +47,40 @@ export function Referrers() {
                           : "border-transparent text-neutral-600 dark:text-neutral-400"
                       }`}
                     >
-                      {tab === "utm_source" && "Source"}
+                      {/* {tab === "utm_source" && "Source"}
                       {tab === "utm_medium" && "Medium"}
                       {tab === "utm_campaign" && "Campaign"}
                       {tab === "utm_term" && "Term"}
-                      {tab === "utm_content" && "Content"}
+                      {tab === "utm_content" && "Content"} */}
+                      {tab === "utm_source" && "来源"}
+                      {tab === "utm_medium" && "媒介"}
+                      {tab === "utm_campaign" && "广告活动"}
+                      {tab === "utm_term" && "关键字"}
+                      {tab === "utm_content" && "内容"}
                       {!tab.startsWith("utm_") && "UTM"}
                     </div>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
-                    <DropdownMenuItem onClick={() => setTab("utm_source")}>Source</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTab("utm_medium")}>Medium</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTab("utm_campaign")}>Campaign</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTab("utm_term")}>Term</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTab("utm_content")}>Content</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTab("utm_source")}>
+                      {/* Source */}
+                      来源
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTab("utm_medium")}>
+                      {/* Medium */}
+                      媒介
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTab("utm_campaign")}>
+                      {/* Campaign */}
+                      广告活动
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTab("utm_term")}>
+                      {/* Term */}
+                      关键字
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTab("utm_content")}>
+                      {/* Content */}
+                      内容
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
                 {/* <TabsTrigger value="utm_source">Source</TabsTrigger>
@@ -73,7 +99,8 @@ export function Referrers() {
           <TabsContent value="referrers">
             <StandardSection
               filterParameter="referrer"
-              title="Referrers"
+              // title="Referrers"
+              title="参照来源"
               getValue={e => e.value}
               getKey={e => e.value}
               getLink={e => `https://${e.value}`}
@@ -90,7 +117,8 @@ export function Referrers() {
           <TabsContent value="channels">
             <StandardSection
               filterParameter="channel"
-              title="Channels"
+              // title="Channels"
+              title="渠道"
               getValue={e => e.value}
               getKey={e => e.value}
               // getLink={(e) => `https://${e.value}`}
@@ -106,7 +134,8 @@ export function Referrers() {
           <TabsContent value="utm_source">
             <StandardSection
               filterParameter="utm_source"
-              title="UTM Source"
+              // title="UTM Source"
+              title="UTM来源"
               getKey={e => e.value}
               getLabel={e => e.value}
               getValue={e => e.value}
@@ -117,7 +146,8 @@ export function Referrers() {
           <TabsContent value="utm_medium">
             <StandardSection
               filterParameter="utm_medium"
-              title="UTM Medium"
+              // title="UTM Medium"
+              title="UTM媒介"
               getKey={e => e.value}
               getLabel={e => e.value}
               getValue={e => e.value}
@@ -128,7 +158,8 @@ export function Referrers() {
           <TabsContent value="utm_campaign">
             <StandardSection
               filterParameter="utm_campaign"
-              title="UTM Campaign"
+              // title="UTM Campaign"
+              title="UTM广告活动"
               getKey={e => e.value}
               getLabel={e => e.value}
               getValue={e => e.value}
@@ -139,7 +170,8 @@ export function Referrers() {
           <TabsContent value="utm_content">
             <StandardSection
               filterParameter="utm_content"
-              title="UTM Content"
+              // title="UTM Content"
+              title="UTM内容"
               getKey={e => e.value}
               getLabel={e => e.value}
               getValue={e => e.value}
@@ -150,7 +182,8 @@ export function Referrers() {
           <TabsContent value="utm_term">
             <StandardSection
               filterParameter="utm_term"
-              title="UTM Term"
+              // title="UTM Term"
+              title="UTM关键字"
               getKey={e => e.value}
               getLabel={e => e.value}
               getValue={e => e.value}

@@ -25,10 +25,22 @@ export function Devices() {
           <div className="flex flex-row gap-2 justify-between items-center">
             <div className="overflow-x-auto">
               <TabsList>
-                <TabsTrigger value="browsers">Browsers</TabsTrigger>
-                <TabsTrigger value="devices">Devices</TabsTrigger>
-                <TabsTrigger value="os">Operating Systems</TabsTrigger>
-                <TabsTrigger value="dimensions">Screen Dimensions</TabsTrigger>
+                <TabsTrigger value="browsers">
+                  {/* Browsers */}
+                  浏览器
+                </TabsTrigger>
+                <TabsTrigger value="devices">
+                  {/* Devices */}
+                  装置
+                </TabsTrigger>
+                <TabsTrigger value="os">
+                  {/* Operating Systems */}
+                  作业系统
+                </TabsTrigger>
+                <TabsTrigger value="dimensions">
+                  {/* Screen Dimensions */}
+                  萤幕尺寸
+                </TabsTrigger>
               </TabsList>
             </div>
             <div className="w-7">
@@ -40,7 +52,8 @@ export function Devices() {
           <TabsContent value="devices">
             <StandardSection
               filterParameter="device_type"
-              title="Devices"
+              // title="Devices"
+              title="装置"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => (
@@ -58,7 +71,8 @@ export function Devices() {
           <TabsContent value="browsers">
             <StandardSection
               filterParameter="browser"
-              title="Browsers"
+              // title="Browsers"
+              title="浏览器"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => (
@@ -83,7 +97,8 @@ export function Devices() {
           </TabsContent>
           <TabsContent value="os">
             <StandardSection
-              title="Operating Systems"
+              // title="Operating Systems"
+              title="作业系统"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => (
@@ -109,7 +124,8 @@ export function Devices() {
           </TabsContent>
           <TabsContent value="dimensions">
             <StandardSection
-              title="Screen Dimensions"
+              // title="Screen Dimensions"
+              title="萤幕尺寸"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => <div className="flex gap-2 items-center">{e.value || "Other"}</div>}

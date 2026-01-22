@@ -18,24 +18,43 @@ import { CustomDateRangePicker } from "./CustomDateRangePicker";
 import { Time } from "./types";
 
 // Convert wellKnown kebab-case to display labels
+// const wellKnownLabels: Record<string, string> = {
+//   today: "Today",
+//   yesterday: "Yesterday",
+//   "last-3-days": "Last 3 Days",
+//   "last-7-days": "Last 7 Days",
+//   "last-14-days": "Last 14 Days",
+//   "last-30-days": "Last 30 Days",
+//   "last-60-days": "Last 60 Days",
+//   "last-30-minutes": "Last 30 Minutes",
+//   "last-1-hour": "Last 1 Hour",
+//   "last-6-hours": "Last 6 Hours",
+//   "last-24-hours": "Last 24 Hours",
+//   "this-week": "This Week",
+//   "last-week": "Last Week",
+//   "this-month": "This Month",
+//   "last-month": "Last Month",
+//   "this-year": "This Year",
+//   "all-time": "All Time",
+// };
 const wellKnownLabels: Record<string, string> = {
-  today: "Today",
-  yesterday: "Yesterday",
-  "last-3-days": "Last 3 Days",
-  "last-7-days": "Last 7 Days",
-  "last-14-days": "Last 14 Days",
-  "last-30-days": "Last 30 Days",
-  "last-60-days": "Last 60 Days",
-  "last-30-minutes": "Last 30 Minutes",
-  "last-1-hour": "Last 1 Hour",
-  "last-6-hours": "Last 6 Hours",
-  "last-24-hours": "Last 24 Hours",
-  "this-week": "This Week",
-  "last-week": "Last Week",
-  "this-month": "This Month",
-  "last-month": "Last Month",
-  "this-year": "This Year",
-  "all-time": "All Time",
+  today: "今日",
+  yesterday: "昨日",
+  "last-3-days": "最近三日",
+  "last-7-days": "最近七日",
+  "last-14-days": "最近十四日",
+  "last-30-days": "最近三十日",
+  "last-60-days": "最近六十日",
+  "last-30-minutes": "最近三十分",
+  "last-1-hour": "最近一小时",
+  "last-6-hours": "最近六小时",
+  "last-24-hours": "最近二十四小时",
+  "this-week": "本周",
+  "last-week": "上周",
+  "this-month": "本月",
+  "last-month": "上月",
+  "this-year": "本年",
+  "all-time": "全部",
 };
 
 const getLabel = (time: Time) => {
@@ -57,26 +76,28 @@ const getLabel = (time: Time) => {
   if (time.mode === "past-minutes") {
     if (time.pastMinutesStart >= 60) {
       const hours = Math.floor(time.pastMinutesStart / 60);
-      return `Last ${hours} ${hours === 1 ? "Hour" : "Hours"}`;
+      // return `Last ${hours} ${hours === 1 ? "Hour" : "Hours"}`;
+      return ` 最近${hours}小时`;
     }
-    return `Last ${time.pastMinutesStart} minutes`;
+    // return `Last ${time.pastMinutesStart} minutes`;
+    return `最近${time.pastMinutesStart}分`;
   }
 
   if (time.mode === "day") {
     if (time.day === now.toISODate()) {
-      return "Today";
+      return "今日";
     }
     if (time.day === now.minus({ days: 1 }).toISODate()) {
-      return "Yesterday";
+      return "昨日";
     }
     return DateTime.fromISO(time.day).toFormat("EEEE, MMM d");
   }
   if (time.mode === "week") {
     if (time.week === now.startOf("week").toISODate()) {
-      return "This Week";
+      return "本周";
     }
     if (time.week === now.minus({ weeks: 1 }).startOf("week").toISODate()) {
-      return "Last Week";
+      return "上周";
     }
     const startDate = DateTime.fromISO(time.week).toFormat("EEEE, MMM d");
     const endDate = DateTime.fromISO(time.week).endOf("week").toFormat("EEEE, MMM d");
@@ -84,21 +105,21 @@ const getLabel = (time: Time) => {
   }
   if (time.mode === "month") {
     if (time.month === now.startOf("month").toISODate()) {
-      return "This Month";
+      return "本月";
     }
     if (time.month === now.minus({ months: 1 }).startOf("month").toISODate()) {
-      return "Last Month";
+      return "上月";
     }
     return DateTime.fromISO(time.month).toFormat("MMMM yyyy");
   }
   if (time.mode === "year") {
     if (time.year === now.startOf("year").toISODate()) {
-      return "This Year";
+      return "本年";
     }
     return DateTime.fromISO(time.year).toFormat("yyyy");
   }
   if (time.mode === "all-time") {
-    return "All Time";
+    return "全部";
   }
 };
 
@@ -133,7 +154,8 @@ export function DateSelector({
           className="w-48"
         >
           <div className="w-4">{time.wellKnown === "today" && <Check className="w-4 h-4" />}</div>
-          Today
+          {/* Today */}
+          今日
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -148,7 +170,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "last-3-days" && <Check className="w-4 h-4" />}</div>
-          Last 3 Days
+          {/* Last 3 Days */}
+          最近三日
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -163,7 +186,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "last-7-days" && <Check className="w-4 h-4" />}</div>
-          Last 7 Days
+          {/* Last 7 Days */}
+          最近七日
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -178,7 +202,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "last-14-days" && <Check className="w-4 h-4" />}</div>
-          Last 14 Days
+          {/* Last 14 Days */}
+          最近十四日
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -193,7 +218,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "last-30-days" && <Check className="w-4 h-4" />}</div>
-          Last 30 Days
+          {/* Last 30 Days */}
+          最近三十日
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -208,7 +234,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "last-60-days" && <Check className="w-4 h-4" />}</div>
-          Last 60 Days
+          {/* Last 60 Days */}
+          最近六十日
         </DropdownMenuItem>
         {pastMinutesEnabled && (
           <>
@@ -224,7 +251,8 @@ export function DateSelector({
               }
             >
               <div className="w-4">{time.wellKnown === "last-30-minutes" && <Check className="w-4 h-4" />}</div>
-              Last 30 Minutes
+              {/* Last 30 Minutes */}
+              最近三十分
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
@@ -237,7 +265,8 @@ export function DateSelector({
               }
             >
               <div className="w-4">{time.wellKnown === "last-1-hour" && <Check className="w-4 h-4" />}</div>
-              Last 1 Hour
+              {/* Last 1 Hour */}
+              最近一小时
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
@@ -250,7 +279,8 @@ export function DateSelector({
               }
             >
               <div className="w-4">{time.wellKnown === "last-6-hours" && <Check className="w-4 h-4" />}</div>
-              Last 6 Hours
+              {/* Last 6 Hours */}
+              最近六小时
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
@@ -263,7 +293,8 @@ export function DateSelector({
               }
             >
               <div className="w-4">{time.wellKnown === "last-24-hours" && <Check className="w-4 h-4" />}</div>
-              Last 24 Hours
+              {/* Last 24 Hours */}
+              最近二十四小时
             </DropdownMenuItem>
           </>
         )}
@@ -280,7 +311,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "this-week" && <Check className="w-4 h-4" />}</div>
-          This Week
+          {/* This Week */}
+          本周
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -294,7 +326,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "this-month" && <Check className="w-4 h-4" />}</div>
-          This Month
+          {/* This Month */}
+          本月
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -308,7 +341,8 @@ export function DateSelector({
           }}
         >
           <div className="w-4">{time.wellKnown === "this-year" && <Check className="w-4 h-4" />}</div>
-          This Year
+          {/* This Year */}
+          本年
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() =>
@@ -319,7 +353,8 @@ export function DateSelector({
           }
         >
           <div className="w-4">{time.wellKnown === "all-time" && <Check className="w-4 h-4" />}</div>
-          All Time
+          {/* All Time */}
+          全部
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <CustomDateRangePicker setTime={setTime} time={time} />

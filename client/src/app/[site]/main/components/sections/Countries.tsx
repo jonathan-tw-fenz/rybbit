@@ -44,12 +44,30 @@ export function Countries() {
         <Tabs defaultValue="countries" value={tab} onValueChange={value => setTab(value as Tab)}>
           <div className="flex flex-row gap-2 justify-between items-center">
             <TabsList>
-              <TabsTrigger value="countries">Countries</TabsTrigger>
-              <TabsTrigger value="regions">Regions</TabsTrigger>
-              <TabsTrigger value="cities">Cities</TabsTrigger>
-              <TabsTrigger value="languages">Languages</TabsTrigger>
-              <TabsTrigger value="map">Map</TabsTrigger>
-              <TabsTrigger value="timezones">Timezones</TabsTrigger>
+              <TabsTrigger value="countries">
+                {/* Countries */}
+                国家
+              </TabsTrigger>
+              <TabsTrigger value="regions">
+                {/* Regions */}
+                地区
+              </TabsTrigger>
+              <TabsTrigger value="cities">
+                {/* Cities */}
+                城市
+              </TabsTrigger>
+              <TabsTrigger value="languages">
+                {/* Languages */}
+                语言
+              </TabsTrigger>
+              <TabsTrigger value="map">
+                {/* Map */}
+                地图
+              </TabsTrigger>
+              <TabsTrigger value="timezones">
+                {/* Timezones */}
+                时区
+              </TabsTrigger>
             </TabsList>
             {tab !== "map" && (
               <div className="w-7">
@@ -62,7 +80,8 @@ export function Countries() {
           <TabsContent value="countries">
             <StandardSection
               filterParameter="country"
-              title="Countries"
+              // title="Countries"
+              title="国家"
               getValue={e => e.value}
               getKey={e => e.value}
               getFilterLabel={e => getCountryName(e.value)}
@@ -81,7 +100,8 @@ export function Countries() {
           <TabsContent value="regions">
             <StandardSection
               filterParameter="region"
-              title="Regions"
+              // title="Regions"
+              title="地区"
               getValue={e => e.value}
               getKey={e => e.value}
               getFilterLabel={e => {
@@ -92,7 +112,7 @@ export function Countries() {
               }}
               getLabel={e => {
                 if (!e.value) {
-                  return "Unknown";
+                  return "未知";
                 }
 
                 const region = subdivisions?.features.find(
@@ -117,12 +137,13 @@ export function Countries() {
           <TabsContent value="cities">
             <StandardSection
               filterParameter="city"
-              title="Cities"
+              // title="Cities"
+              title="城市"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => {
                 if (!e.value || e.value === "-") {
-                  return "Unknown";
+                  return "未知";
                 }
 
                 const { country, region, city } = getCountryCity(e.value) ?? {};
@@ -149,7 +170,8 @@ export function Countries() {
           <TabsContent value="languages">
             <StandardSection
               filterParameter="language"
-              title="Languages"
+              // title="Languages"
+              title="语言"
               getValue={e => e.value}
               getKey={e => e.value}
               getFilterLabel={e => getLanguageName(e.value) ?? ""}
@@ -170,7 +192,8 @@ export function Countries() {
           <TabsContent value="timezones">
             <StandardSection
               filterParameter="timezone"
-              title="Timezones"
+              // title="Timezones"
+              title="时区"
               getValue={e => e.value}
               getKey={e => e.value}
               // getFilterLabel={e => getLanguageName(e.value) ?? ""}

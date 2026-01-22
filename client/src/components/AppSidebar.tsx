@@ -22,7 +22,8 @@ function AdminLink({ isExpanded }: { isExpanded: boolean }) {
     <SidebarLink
       href="/admin"
       icon={<ShieldUser className="w-5 h-5" />}
-      label="Admin"
+      // label="Admin"
+      label="管理员"
       active={pathname.startsWith("/admin")}
       expanded={isExpanded}
     />
@@ -55,7 +56,8 @@ function AppSidebarContent() {
         <SidebarLink
           href="/"
           icon={<HomeIcon className="w-5 h-5" />}
-          label="Home"
+          // label="Home"
+          label="首页"
           // active={!isNaN(Number(pathname.split("/")[1]))}
           active={false}
           expanded={isExpanded}
@@ -79,21 +81,24 @@ function AppSidebarContent() {
             <SidebarLink
               href="/settings/account"
               icon={<User className="w-5 h-5" />}
-              label="Account"
+              // label="Account"
+              label="帐号"
               active={pathname.startsWith("/settings/account")}
               expanded={isExpanded}
             />
             <SidebarLink
               href="/settings/organization"
               icon={<Building2 className="w-5 h-5" />}
-              label="Organization"
+              // label="Organization"
+              label="组织"
               active={pathname.startsWith("/settings/organization")}
               expanded={isExpanded}
             />
             <SidebarLink
               onClick={signout}
               icon={<LogOut className="w-5 h-5" />}
-              label="Sign out"
+              // label="Sign out"
+              label="登出"
               expanded={isExpanded}
             />
           </>

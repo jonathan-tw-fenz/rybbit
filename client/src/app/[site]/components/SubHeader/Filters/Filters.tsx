@@ -20,7 +20,8 @@ export function Filters({ availableFilters }: { availableFilters?: FilterParamet
           <Tooltip key={filter.parameter}>
             {disabled && (
               <TooltipContent>
-                <p>Filter not active for this page</p>
+                {/* <p>Filter not active for this page</p> */}
+                <p>筛选条件不适用于本页面</p>
               </TooltipContent>
             )}
             <TooltipTrigger>

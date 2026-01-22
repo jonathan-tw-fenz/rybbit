@@ -31,7 +31,8 @@ export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, 
 
 export const getCountryName = (countryCode: string) => {
   try {
-    return regionNamesInEnglish.of(countryCode.toUpperCase()) || countryCode;
+    // return regionNamesInEnglish.of(countryCode.toUpperCase()) || countryCode;
+    return regionNamesInChinese.of(countryCode.toUpperCase()) || countryCode;
   } catch (error) {
     return countryCode;
   }
@@ -72,18 +73,25 @@ const regionNamesInEnglish = new Intl.DisplayNames(["en"], { type: "region" });
 const languageNamesInEnglish = new Intl.DisplayNames(["en"], {
   type: "language",
 });
+const regionNamesInChinese = new Intl.DisplayNames(["zh"], { type: "region" });
+const languageNamesInChinese = new Intl.DisplayNames(["zh"], {
+  type: "language",
+});
 
 export const getLanguageName = (languageCode: string) => {
   try {
     // Handle codes like "en-US" that have both language and region
     if (languageCode.includes("-")) {
       const [language, region] = languageCode.split("-");
-      const languageName = languageNamesInEnglish.of(language);
-      const regionName = regionNamesInEnglish.of(region);
+      // const languageName = languageNamesInEnglish.of(language);
+      // const regionName = regionNamesInEnglish.of(region);
+      const languageName = languageNamesInChinese.of(language);
+      const regionName = regionNamesInChinese.of(region);
       return `${languageName} (${regionName})`;
     }
     // Just a language code
-    return languageNamesInEnglish.of(languageCode);
+    // return languageNamesInEnglish.of(languageCode);
+    return languageNamesInChinese.of(languageCode);
   } catch (error) {
     return languageCode;
   }

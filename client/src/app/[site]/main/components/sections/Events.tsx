@@ -24,8 +24,14 @@ function Events_() {
       )}
       <div className="relative pr-2">
         <div className="flex flex-row gap-2 justify-between pr-1 text-xs text-neutral-600 dark:text-neutral-400 mb-2">
-          <div>Custom Events</div>
-          <div>Count</div>
+          <div>
+            {/* Custom Events */}
+            自订事件
+          </div>
+          <div>
+            {/* Count */}
+            次数
+          </div>
         </div>
         <ScrollArea className="h-[394px]">
           <EventList events={eventNamesData || []} isLoading={isLoadingEventNames} />
@@ -47,8 +53,14 @@ function OutboundLinks({ expanded, close }: { expanded: boolean; close: () => vo
       )}
       <div className="relative">
         <div className="flex flex-row gap-2 justify-between pr-1 text-xs text-neutral-600 dark:text-neutral-400 mb-2">
-          <div>Outbound Links</div>
-          <div>Clicks</div>
+          <div>
+            {/* Outbound Links */}
+            外部连结
+          </div>
+          <div>
+            {/* Clicks */}
+            点击数
+          </div>
         </div>
         <OutboundLinksList outboundLinks={outboundLinksData || []} isLoading={isLoadingOutboundLinks} />
         <OutboundLinksDialog outboundLinks={outboundLinksData || []} expanded={expanded} close={close} />
@@ -68,8 +80,14 @@ export function Events() {
           <div className="flex flex-row gap-2 justify-between items-center">
             <div className="overflow-x-auto">
               <TabsList>
-                <TabsTrigger value="events">Custom Events</TabsTrigger>
-                <TabsTrigger value="outbound">Outbound Links</TabsTrigger>
+                <TabsTrigger value="events">
+                  {/* Custom Events */}
+                  自订事件
+                </TabsTrigger>
+                <TabsTrigger value="outbound">
+                  {/* Outbound Links */}
+                  外部连结
+                </TabsTrigger>
               </TabsList>
             </div>
             {tab === "outbound" && (

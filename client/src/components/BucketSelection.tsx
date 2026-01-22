@@ -12,16 +12,20 @@ const getOptions = (time: Time) => {
       return (
         <SelectContent>
           <SelectItem size="sm" value="minute">
-            Min
+            {/* Min */}
+            分钟
           </SelectItem>
           <SelectItem size="sm" value="five_minutes">
-            5 Min
+            {/* 5 Min */}
+            5分钟
           </SelectItem>
           <SelectItem size="sm" value="fifteen_minutes">
-            15 Min
+            {/* 15 Min */}
+            15分钟
           </SelectItem>
           <SelectItem size="sm" value="hour">
-            Hour
+            {/* Hour */}
+            小时
           </SelectItem>
         </SelectContent>
       );
@@ -30,7 +34,8 @@ const getOptions = (time: Time) => {
       return (
         <SelectContent>
           <SelectItem size="sm" value="hour">
-            Hour
+            {/* Hour */}
+            小时
           </SelectItem>
         </SelectContent>
       );
@@ -39,7 +44,8 @@ const getOptions = (time: Time) => {
     return (
       <SelectContent>
         <SelectItem size="sm" value="minute">
-          Min
+          {/* Min */}
+          分钟
         </SelectItem>
       </SelectContent>
     );
@@ -48,16 +54,20 @@ const getOptions = (time: Time) => {
     return (
       <SelectContent>
         <SelectItem size="sm" value="minute">
-          Min
+          {/* Min */}
+          分钟
         </SelectItem>
         <SelectItem size="sm" value="five_minutes">
-          5 Min
+          {/* 5 Min */}
+          5分钟
         </SelectItem>
         <SelectItem size="sm" value="fifteen_minutes">
-          15 Min
+          {/* 15 Min */}
+          15分钟
         </SelectItem>
         <SelectItem size="sm" value="hour">
-          Hour
+          {/* Hour */}
+          小时
         </SelectItem>
       </SelectContent>
     );
@@ -66,13 +76,16 @@ const getOptions = (time: Time) => {
     return (
       <SelectContent>
         <SelectItem size="sm" value="fifteen_minutes">
-          15 Min
+          {/* 15 Min */}
+          15分钟
         </SelectItem>
         <SelectItem size="sm" value="hour">
-          Hour
+          {/* Hour */}
+          小时
         </SelectItem>
         <SelectItem size="sm" value="day">
-          Day
+          {/* Day */}
+          天
         </SelectItem>
       </SelectContent>
     );
@@ -81,13 +94,16 @@ const getOptions = (time: Time) => {
     return (
       <SelectContent>
         <SelectItem size="sm" value="hour">
-          Hour
+          {/* Hour */}
+          小时
         </SelectItem>
         <SelectItem size="sm" value="day">
-          Day
+          {/* Day */}
+          天
         </SelectItem>
         <SelectItem size="sm" value="week">
-          Week
+          {/* Week */}
+          周
         </SelectItem>
       </SelectContent>
     );
@@ -96,13 +112,16 @@ const getOptions = (time: Time) => {
     return (
       <SelectContent>
         <SelectItem size="sm" value="day">
-          Day
+          {/* Day */}
+          天
         </SelectItem>
         <SelectItem size="sm" value="week">
-          Week
+          {/* Week */}
+          周
         </SelectItem>
         <SelectItem size="sm" value="month">
-          Month
+          {/* Month */}
+          月
         </SelectItem>
       </SelectContent>
     );
@@ -115,37 +134,44 @@ const getOptions = (time: Time) => {
       <SelectContent>
         {timeRangeLength <= 7 && (
           <SelectItem size="sm" value="five_minutes">
-            5 Min
+            {/* 5 Min */}
+            5分钟
           </SelectItem>
         )}
         {timeRangeLength <= 14 && (
           <>
             <SelectItem size="sm" value="ten_minutes">
-              10 Min
+              {/* 10 Min */}
+              10分钟
             </SelectItem>
             <SelectItem size="sm" value="fifteen_minutes">
-              15 Min
+              {/* 15 Min */}
+              15分钟
             </SelectItem>
           </>
         )}
         {timeRangeLength <= 30 && (
           <SelectItem size="sm" value="hour">
-            Hour
+            {/* Hour */}
+            小时
           </SelectItem>
         )}
         {timeRangeLength > 1 && (
           <SelectItem size="sm" value="day">
-            Day
+            {/* Day */}
+            天
           </SelectItem>
         )}
         {timeRangeLength >= 28 && (
           <SelectItem size="sm" value="week">
-            Week
+            {/* Week */}
+            周
           </SelectItem>
         )}
         {timeRangeLength >= 60 && (
           <SelectItem size="sm" value="month">
-            Month
+            {/* Month */}
+            月
           </SelectItem>
         )}
       </SelectContent>

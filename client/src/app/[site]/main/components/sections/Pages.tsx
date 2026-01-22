@@ -27,11 +27,26 @@ export function Pages() {
           <div className="flex flex-row gap-2 justify-between items-center">
             <div className="overflow-x-auto">
               <TabsList>
-                <TabsTrigger value="pages">Pages</TabsTrigger>
-                <TabsTrigger value="page_title">Titles</TabsTrigger>
-                <TabsTrigger value="entry_pages">Entries</TabsTrigger>
-                <TabsTrigger value="exit_pages">Exits</TabsTrigger>
-                <TabsTrigger value="hostname">Hostnames</TabsTrigger>
+                <TabsTrigger value="pages">
+                  {/* Pages */}
+                  页面
+                </TabsTrigger>
+                <TabsTrigger value="page_title">
+                  {/* Titles */}
+                  标题
+                </TabsTrigger>
+                <TabsTrigger value="entry_pages">
+                  {/* Entries */}
+                  入口
+                </TabsTrigger>
+                <TabsTrigger value="exit_pages">
+                  {/* Exits */}
+                  出口
+                </TabsTrigger>
+                <TabsTrigger value="hostname">
+                  {/* Hostnames */}
+                  网域
+                </TabsTrigger>
               </TabsList>
             </div>
             <div className="w-7">
@@ -43,7 +58,8 @@ export function Pages() {
           <TabsContent value="pages">
             <StandardSection
               filterParameter="pathname"
-              title="Pages"
+              // title="Pages"
+              title="页面"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => truncateString(e.value, 50) || "Other"}
@@ -55,7 +71,8 @@ export function Pages() {
           <TabsContent value="page_title">
             <StandardSection
               filterParameter="page_title"
-              title="Page Title"
+              // title="Page Title"
+              title="标题"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => truncateString(e.value, 50) || "Other"}
@@ -71,7 +88,8 @@ export function Pages() {
           <TabsContent value="entry_pages">
             <StandardSection
               filterParameter="entry_page"
-              title="Entry Pages"
+              // title="Entry Pages"
+              title="入口页"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => e.value || "Other"}
@@ -83,7 +101,8 @@ export function Pages() {
           <TabsContent value="exit_pages">
             <StandardSection
               filterParameter="exit_page"
-              title="Exit Pages"
+              // title="Exit Pages"
+              title="出口页"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => e.value || "Other"}
@@ -95,7 +114,8 @@ export function Pages() {
           <TabsContent value="hostname">
             <StandardSection
               filterParameter="hostname"
-              title="Hostnames"
+              // title="Hostnames"
+              title="网域名称"
               getValue={e => e.value}
               getKey={e => e.value}
               getLabel={e => e.value}

@@ -63,7 +63,8 @@ export function NewFilterButton({ availableFilters }: { availableFilters?: Filte
         }}
       >
         <ListFilterPlus className="w-4 h-4" />
-        Filter
+        {/* Filter */}
+        筛选
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="flex flex-col p-0 max-w-[95vw]">
         <div className="flex flex-col gap-2 p-3">
@@ -80,7 +81,8 @@ export function NewFilterButton({ availableFilters }: { availableFilters?: Filte
         <div className="flex justify-between border-t border-neutral-200 dark:border-neutral-750 p-3">
           <Button variant={"ghost"} onClick={() => addLocalFilter()} size={"sm"} className="gap-1">
             <Plus className="w-3 h-3" />
-            Add Filter
+            {/* Add Filter */}
+            新增筛选
           </Button>
           <Button
             variant={"outline"}
@@ -90,7 +92,8 @@ export function NewFilterButton({ availableFilters }: { availableFilters?: Filte
               setOpen(false);
             }}
           >
-            Save Filters
+            {/* Save Filters */}
+            储存筛选
           </Button>
         </div>
       </DropdownMenuContent>

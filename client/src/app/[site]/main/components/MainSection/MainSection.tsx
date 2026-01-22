@@ -14,14 +14,23 @@ import { Chart } from "./Chart";
 import { Overview } from "./Overview";
 import { PreviousChart } from "./PreviousChart";
 
+// const SELECTED_STAT_MAP = {
+//   pageviews: "Pageviews",
+//   sessions: "Sessions",
+//   pages_per_session: "Pages per Session",
+//   bounce_rate: "Bounce Rate",
+//   session_duration: "Session Duration",
+//   users: "Users",
+// };
+
 const SELECTED_STAT_MAP = {
-  pageviews: "Pageviews",
-  sessions: "Sessions",
-  pages_per_session: "Pages per Session",
-  bounce_rate: "Bounce Rate",
-  session_duration: "Session Duration",
-  users: "Users",
-};
+  pageviews: "造访页面数",
+  sessions: "工作阶段",
+  pages_per_session: "工作阶段平均页面数",
+  bounce_rate: "跳出率",
+  session_duration: "工作阶段长度",
+  users: "使用者",
+}
 
 const tilt_wrap = Tilt_Warp({
   subsets: ["latin"],

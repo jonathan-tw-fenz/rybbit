@@ -193,17 +193,33 @@ export function Overview() {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0 items-center">
-      <Stat title="Unique Users" id="users" value={currentUsers} previous={previousUsers} isLoading={isLoading} />
-      <Stat title="Sessions" id="sessions" value={currentSessions} previous={previousSessions} isLoading={isLoading} />
+      <Stat 
+        // title="Unique Users"
+        title="独特使用者" 
+        id="users" 
+        value={currentUsers} 
+        previous={previousUsers} 
+        isLoading={isLoading} 
+      />
+      <Stat 
+        // title="Sessions"
+        title="工作阶段" 
+        id="sessions" 
+        value={currentSessions} 
+        previous={previousSessions} 
+        isLoading={isLoading} 
+      />
       <Stat
-        title="Pageviews"
+        // title="Pageviews"
+        title="造访页面数"
         id="pageviews"
         value={currentPageviews}
         previous={previousPageviews}
         isLoading={isLoading}
       />
       <Stat
-        title="Pages per Session"
+        // title="Pages per Session"
+        title="工作阶段平均页面数"
         id="pages_per_session"
         value={currentPagesPerSession}
         previous={previousPagesPerSession}
@@ -211,7 +227,8 @@ export function Overview() {
         isLoading={isLoading}
       />
       <Stat
-        title="Bounce Rate"
+        // title="Bounce Rate"
+        title="跳出率"
         id="bounce_rate"
         value={currentBounceRate}
         previous={previousBounceRate}
@@ -221,7 +238,8 @@ export function Overview() {
         reverseColor={true}
       />
       <Stat
-        title="Session Duration"
+        // title="Session Duration"
+        title="工作阶段长度"
         id="session_duration"
         value={currentSessionDuration}
         previous={previousSessionDuration}
