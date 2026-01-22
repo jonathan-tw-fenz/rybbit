@@ -175,14 +175,15 @@ function SidebarContent() {
           icon={<User className="w-4 h-4" />}
         />
         <SidebarComponents.Item
-          label="Events"
+          // label="Events"
+          label="事件"
           active={isActiveTab("events")}
           href={getTabPath("events")}
           icon={<MousePointerClick className="w-4 h-4" />}
         />
         <SidebarComponents.Item
           // label="Errors"
-          label="事件"
+          label="错误"
           active={isActiveTab("errors")}
           href={getTabPath("errors")}
           icon={<AlertTriangle className="w-4 h-4" />}
