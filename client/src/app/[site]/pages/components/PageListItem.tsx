@@ -135,12 +135,14 @@ export function PageListItem({ pageData, isLoading = false }: PageListItemProps)
             <div className="text-right min-w-[120px]">
               <div>
                 <span className="text-base font-semibold">{pageData.count.toLocaleString()}</span>
-                <span className="text-xs text-foreground/70"> sessions</span>
+                {/* <span className="text-xs text-foreground/70"> sessions</span> */}
+                <span className="text-xs text-foreground/70"> 工作阶段数</span>
               </div>
               {pageData.time_on_page_seconds !== undefined && (
                 <div>
                   <span className="text-base font-semibold">{formatShortDuration(pageData.time_on_page_seconds)} </span>
-                  <span className="text-xs text-foreground/70">avg time</span>
+                  {/* <span className="text-xs text-foreground/70">avg time</span> */}
+                  <span className="text-xs text-foreground/70">平均工作阶段长度</span>
                 </div>
               )}
             </div>

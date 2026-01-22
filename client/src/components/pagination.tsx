@@ -40,7 +40,7 @@ export function Pagination<TData>({
           <span>Loading {itemName}...</span>
         ) : (
           <>
-            Showing{" "}
+            {/* Showing{" "}
             <span className="font-semibold">
               {data?.items?.length ? pagination.pageIndex * pagination.pageSize + 1 : 0}
             </span>{" "}
@@ -48,13 +48,23 @@ export function Pagination<TData>({
             <span className="font-semibold">
               {data?.items?.length ? Math.min((pagination.pageIndex + 1) * pagination.pageSize, data?.total || 0) : 0}
             </span>{" "}
-            of <span className="font-semibold">{data?.total || 0}</span> {itemName}
+            of <span className="font-semibold">{data?.total || 0}</span> {itemName} */}
+            显示第{" "}
+            <span className="font-semibold">
+              {data?.items?.length ? pagination.pageIndex * pagination.pageSize + 1 : 0}
+            </span>{" "}
+            至第{" "}
+            <span className="font-semibold">
+              {data?.items?.length ? Math.min((pagination.pageIndex + 1) * pagination.pageSize, data?.total || 0) : 0}
+            </span>{" "}
+            项，总共 <span className="font-semibold">{data?.total || 0}</span> {itemName}
           </>
         )}
       </div>
       <div className="flex items-center space-x-2">
         <div className="mr-4 hidden items-center space-x-2 md:flex">
-          <span className="text-sm text-neutral-400">Page size:</span>
+          {/* <span className="text-sm text-neutral-400">Page size:</span> */}
+          <span className="text-sm text-neutral-400">每页长度:</span>
           <Select
             value={pagination.pageSize.toString()}
             onValueChange={value => {
@@ -93,11 +103,14 @@ export function Pagination<TData>({
         </Button>
         <div className="text-sm text-neutral-400">
           {isLoading ? (
-            <span>Loading...</span>
+            // <span>Loading...</span>
+            <span>载入中...</span>
           ) : (
             <>
-              Page <span className="font-semibold">{table.getState().pagination.pageIndex + 1}</span> of{" "}
-              <span className="font-semibold">{Math.max(table.getPageCount(), 1)}</span>
+              {/* Page <span className="font-semibold">{table.getState().pagination.pageIndex + 1}</span> of{" "}
+              <span className="font-semibold">{Math.max(table.getPageCount(), 1)}</span> */}
+              第 <span className="font-semibold">{table.getState().pagination.pageIndex + 1}</span> 页，共{" "}
+              <span className="font-semibold">{Math.max(table.getPageCount(), 1)}</span> 页
             </>
           )}
         </div>

@@ -103,7 +103,8 @@ export default function Pages() {
           <PageListSkeleton count={pagination.pageSize} />
         ) : isErrorPages ? (
           <div className="text-center p-8 text-destructive">
-            <p>Error loading pages data</p>
+            {/* <p>Error loading pages data</p> */}
+            <p>载入页面资料时发生错误</p>
             <p className="text-sm">{pagesError?.toString()}</p>
           </div>
         ) : pagesDataArray && pagesDataArray.length > 0 ? (
@@ -127,13 +128,15 @@ export default function Pages() {
                 pagination={pagination}
                 setPagination={setPagination}
                 isLoading={isLoading}
-                itemName="pages"
+                // itemName="pages"
+                itemName="页"
               />
             )}
           </>
         ) : !isLoadingPages && !isFetching ? (
           <div className="text-center py-12 text-muted-foreground">
-            <p>No pages data found for the selected period.</p>
+            {/* <p>No pages data found for the selected period.</p> */}
+            <p>此时段内无页面资料</p>
           </div>
         ) : null}
       </div>
