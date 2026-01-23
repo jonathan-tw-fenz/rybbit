@@ -113,6 +113,8 @@ export default function UsersPage() {
     if (diff < 1) {
       // return "<1 min ago";
       return "<1分钟前";
+      // return "<1 min ago";
+      return "<1分钟前";
     }
 
     // return date.toRelative();
@@ -159,8 +161,8 @@ export default function UsersPage() {
                 <CountryFlag country={country || ""} />
               </TooltipTrigger>
               <TooltipContent>
-                {/* <p>{info.getValue() ? getCountryName(info.getValue()) : "Unknown"}</p> */}
-                <p>{info.getValue() ? getCountryName(info.getValue()) : "未知"}</p>
+                {/* <p>{country ? getCountryName(country) : "Unknown"}</p> */}
+                <p>{country ? getCountryName(country) : "未知"}</p>
               </TooltipContent>
             </Tooltip>
             {info.row.original.city || info.row.original.region || getCountryName(country)}
@@ -211,6 +213,7 @@ export default function UsersPage() {
             onClick={e => handleFilterClick(e, "browser", browser)}
           >
             <Browser browser={browser || "Unknown"} />
+            {/* {browser || "Unknown"} */}
             {browser || "未知"}
           </div>
         );
@@ -228,11 +231,15 @@ export default function UsersPage() {
             <OperatingSystem os={os || ""} />
             {/* {os || "Unknown"} */}
             {os || "未知"}
+            {/* {os || "Unknown"} */}
+            {os || "未知"}
           </div>
         );
       },
     }),
     columnHelper.accessor("device_type", {
+      // header: "Device",
+      header: "装置",
       // header: "Device",
       header: "装置",
       cell: info => {
@@ -252,7 +259,7 @@ export default function UsersPage() {
     }),
     columnHelper.accessor("pageviews", {
       // header: ({ column }) => <SortHeader column={column}>Pageviews</SortHeader>,
-      header: ({ column }) => <SortHeader column={column}>造访页面数</SortHeader>,
+      header: ({ column }) => <SortHeader column={column}>观看页面数</SortHeader>,
       cell: info => <div className="whitespace-nowrap">{info.getValue().toLocaleString()}</div>,
     }),
     columnHelper.accessor("events", {
