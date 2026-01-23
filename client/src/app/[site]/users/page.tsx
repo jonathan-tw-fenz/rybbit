@@ -98,16 +98,19 @@ export default function UsersPage() {
     const diff = Math.abs(date.diffNow(["minutes"]).minutes);
 
     if (diff < 1) {
-      return "<1 min ago";
+      // return "<1 min ago";
+      return "<1分钟前";
     }
 
-    return date.toRelative();
+    // return date.toRelative();
+    return date.toRelative({ locale: "zh" });
   };
 
   // Define table columns with consistent Title Case capitalization
   const columns = [
     columnHelper.accessor("user_id", {
-      header: "User",
+      // header: "User",
+      header: "使用者",
       cell: info => {
         const identifiedUserId = info.row.original.identified_user_id;
         const isIdentified = !!info.row.original.identified_user_id;
@@ -129,7 +132,8 @@ export default function UsersPage() {
       },
     }),
     columnHelper.accessor("country", {
-      header: "Country",
+      // header: "Country",
+      header: "国家",
       cell: info => {
         return (
           <div className="flex items-center gap-2 whitespace-nowrap">
@@ -138,7 +142,8 @@ export default function UsersPage() {
                 <CountryFlag country={info.getValue() || ""} />
               </TooltipTrigger>
               <TooltipContent>
-                <p>{info.getValue() ? getCountryName(info.getValue()) : "Unknown"}</p>
+                {/* <p>{info.getValue() ? getCountryName(info.getValue()) : "Unknown"}</p> */}
+                <p>{info.getValue() ? getCountryName(info.getValue()) : "未知"}</p>
               </TooltipContent>
             </Tooltip>
             {info.row.original.city || info.row.original.region || getCountryName(info.getValue())}
@@ -147,7 +152,8 @@ export default function UsersPage() {
       },
     }),
     columnHelper.accessor("referrer", {
-      header: "Channel",
+      // header: "Channel",
+      header: "渠道",
       cell: info => {
         const channel = info.row.original.channel;
         const referrer = info.getValue();
@@ -172,11 +178,14 @@ export default function UsersPage() {
       },
     }),
     columnHelper.accessor("browser", {
-      header: "Browser",
+      // header: "Browser",
+      header: "浏览器",
       cell: info => (
         <div className="flex items-center gap-2 whitespace-nowrap">
-          <Browser browser={info.getValue() || "Unknown"} />
-          {info.getValue() || "Unknown"}
+          {/* <Browser browser={info.getValue() || "Unknown"} />
+          {info.getValue() || "Unknown"} */}
+          <Browser browser={info.getValue() || "未知"} />
+          {info.getValue() || "未知"}
         </div>
       ),
     }),
@@ -185,12 +194,14 @@ export default function UsersPage() {
       cell: info => (
         <div className="flex items-center gap-2 whitespace-nowrap">
           <OperatingSystem os={info.getValue() || ""} />
-          {info.getValue() || "Unknown"}
+          {/* {info.getValue() || "Unknown"} */}
+          {info.getValue() || "未知"}
         </div>
       ),
     }),
     columnHelper.accessor("device_type", {
-      header: "Device",
+      // header: "Device",
+      header: "装置",
       cell: info => {
         const deviceType = info.getValue();
         return (
@@ -204,20 +215,24 @@ export default function UsersPage() {
       },
     }),
     columnHelper.accessor("pageviews", {
-      header: ({ column }) => <SortHeader column={column}>Pageviews</SortHeader>,
+      // header: ({ column }) => <SortHeader column={column}>Pageviews</SortHeader>,
+      header: ({ column }) => <SortHeader column={column}>观看页面数</SortHeader>,
       cell: info => <div className="whitespace-nowrap">{info.getValue().toLocaleString()}</div>,
     }),
     columnHelper.accessor("events", {
-      header: ({ column }) => <SortHeader column={column}>Events</SortHeader>,
+      // header: ({ column }) => <SortHeader column={column}>Events</SortHeader>,
+      header: ({ column }) => <SortHeader column={column}>事件数</SortHeader>,
       cell: info => <div className="whitespace-nowrap">{info.getValue().toLocaleString()}</div>,
     }),
     columnHelper.accessor("sessions", {
-      header: ({ column }) => <SortHeader column={column}>Sessions</SortHeader>,
+      // header: ({ column }) => <SortHeader column={column}>Sessions</SortHeader>,
+      header: ({ column }) => <SortHeader column={column}>工作阶段数</SortHeader>,
       cell: info => <div className="whitespace-nowrap">{info.getValue().toLocaleString()}</div>,
     }),
 
     columnHelper.accessor("last_seen", {
-      header: ({ column }) => <SortHeader column={column}>Last Seen</SortHeader>,
+      // header: ({ column }) => <SortHeader column={column}>Last Seen</SortHeader>,
+      header: ({ column }) => <SortHeader column={column}>上次出现</SortHeader>,
       cell: info => {
         const date = DateTime.fromSQL(info.getValue(), {
           zone: "utc",
@@ -240,7 +255,8 @@ export default function UsersPage() {
       },
     }),
     columnHelper.accessor("first_seen", {
-      header: ({ column }) => <SortHeader column={column}>First Seen</SortHeader>,
+      // header: ({ column }) => <SortHeader column={column}>First Seen</SortHeader>,
+      header: ({ column }) => <SortHeader column={column}>第一次出现</SortHeader>,
       cell: info => {
         const date = DateTime.fromSQL(info.getValue(), {
           zone: "utc",
@@ -286,8 +302,10 @@ export default function UsersPage() {
   if (isError) {
     return (
       <ErrorState
-        title="Failed to load users"
-        message="There was a problem fetching the users. Please try again later."
+        // title="Failed to load users"
+        // message="There was a problem fetching the users. Please try again later."
+        title="使用者载入失败"
+        message="使用者载入时发生错误，请稍后再试"
       />
     );
   }
@@ -299,7 +317,8 @@ export default function UsersPage() {
         <div className="flex items-center justify-end gap-2">
           <Switch id="identified-only" checked={identifiedOnly} onCheckedChange={setIdentifiedOnly} />
           <Label htmlFor="identified-only" className="text-sm text-neutral-600 dark:text-neutral-400 cursor-pointer">
-            Identified only
+            {/* Identified only */}
+            限会员
           </Label>
         </div>
         <div className="rounded-md border border-neutral-100 dark:border-neutral-800 bg-white dark:bg-neutral-900">
@@ -340,7 +359,8 @@ export default function UsersPage() {
                       colSpan={columns.length}
                       className="px-3 py-8 text-center text-neutral-500 dark:text-neutral-400"
                     >
-                      No users found
+                      {/* No users found */}
+                      无使用者
                     </td>
                   </tr>
                 ) : (
@@ -382,7 +402,8 @@ export default function UsersPage() {
                 pagination={pagination}
                 setPagination={setPagination}
                 isLoading={isLoading}
-                itemName="users"
+                // itemName="users"
+                itemName="使用者"
               />
             </div>
           </div>
