@@ -432,7 +432,10 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                           {isIdentified && <IdentifiedBadge traits={session.traits} />}
                         </div>
                         <div className="text-sm text-neutral-500 dark:text-neutral-400 flex items-center">
-                          <span className="font-medium text-neutral-600 dark:text-neutral-300">User ID:</span>
+                          <span className="font-medium text-neutral-600 dark:text-neutral-300">
+                            {/* User ID: */}
+                            使用者ID:
+                          </span>
                           <CopyText
                             text={isIdentified ? session.identified_user_id : sessionDetails.user_id}
                             maxLength={24}
