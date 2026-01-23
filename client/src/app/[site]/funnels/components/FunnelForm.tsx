@@ -215,8 +215,8 @@ export function FunnelForm({
             漏斗预览
           </div>
           <p className="text-sm text-neutral-500">
-            {/* Configure your funnel steps and click "Query Funnel" to preview results */}
-            设定漏斗步骤后，点击「漏斗查询」来预览漏斗结果
+            {/* Configure your funnel steps*/}
+            請先设定漏斗步骤
           </p>
         </div>
       </div>
