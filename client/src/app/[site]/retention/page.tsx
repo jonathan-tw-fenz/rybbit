@@ -17,14 +17,23 @@ import { RetentionChart } from "./RetentionChart";
 import { ErrorState } from "../../../components/ErrorState";
 
 // Available time range options (in days)
+// const RANGE_OPTIONS = [
+//   { value: "7", label: "Last 7 days" },
+//   { value: "14", label: "Last 14 days" },
+//   { value: "30", label: "Last 30 days" },
+//   { value: "60", label: "Last 60 days" },
+//   { value: "90", label: "Last 90 days" },
+//   { value: "180", label: "Last 6 months" },
+//   { value: "365", label: "Last 1 year" },
+// ];
 const RANGE_OPTIONS = [
-  { value: "7", label: "Last 7 days" },
-  { value: "14", label: "Last 14 days" },
-  { value: "30", label: "Last 30 days" },
-  { value: "60", label: "Last 60 days" },
-  { value: "90", label: "Last 90 days" },
-  { value: "180", label: "Last 6 months" },
-  { value: "365", label: "Last 1 year" },
+  { value: "7", label: "最近7天" },
+  { value: "14", label: "最近14天" },
+  { value: "30", label: "最近30天" },
+  { value: "60", label: "最近60天" },
+  { value: "90", label: "最近90天" },
+  { value: "180", label: "最近6个月" },
+  { value: "365", label: "最近1年" },
 ];
 
 // Dynamic color function that creates a smooth gradient based on retention percentage
@@ -122,7 +131,8 @@ export default function RetentionPage() {
 
   // Labels for column headers based on mode
   const getPeriodLabel = (index: number) => {
-    return mode === "day" ? `Day ${index}` : `Week ${index}`;
+    // return mode === "day" ? `Day ${index}` : `Week ${index}`;
+    return mode === "day" ? `第${index}天` : `第${index}周`;
   };
 
   const handleModeChange = (newMode: string) => {
@@ -157,10 +167,12 @@ export default function RetentionPage() {
         <Tabs value={mode} onValueChange={handleModeChange}>
           <TabsList>
             <TabsTrigger value="day" disabled={isLoading}>
-              Daily
+              {/* Daily */}
+              每天
             </TabsTrigger>
             <TabsTrigger value="week" disabled={isLoading}>
-              Weekly
+              {/* Weekly */}
+              每周
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -175,8 +187,10 @@ export default function RetentionPage() {
         <Card>
           <CardContent>
             <ErrorState
-              title="Failed to load retention data"
-              message="There was a problem fetching the retention data. Please try again later."
+              // title="Failed to load retention data"
+              // message="There was a problem fetching the retention data. Please try again later."
+              title="留客资料载入失败"
+              message="载入留客资料时发生错误，请稍后再试"
             />
           </CardContent>
         </Card>
@@ -190,8 +204,10 @@ export default function RetentionPage() {
       <div className="p-2 md:p-4 max-w-[1300px] mx-auto flex flex-col gap-3">
         <NothingFound
           icon={<ChartColumnDecreasing className="w-10 h-10" />}
-          title={"No retention data available"}
-          description={"Try selecting a different time range or make sure you have tracking data in the system."}
+          // title={"No retention data available"}
+          // description={"Try selecting a different time range or make sure you have tracking data in the system."}
+          title={"无留客资料"}
+          description={"请尝试选择另一时段，并确认系统是否有追踪资料"}
         />
       </div>
     );
@@ -207,7 +223,10 @@ export default function RetentionPage() {
         <FilterControls />
         <Card className="overflow-visible">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle>Retention</CardTitle>
+            <CardTitle>
+              {/* Retention */}
+              留客  
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 overflow-visible">
             {isLoading ? (
@@ -232,7 +251,8 @@ export default function RetentionPage() {
                   >
                     {/* Header Row */}
                     <div className="p-2 text-sm font-semibold bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-100 text-center sticky left-0 z-10 border-b border-r border-neutral-50 dark:border-neutral-700">
-                      Cohort
+                      {/* Cohort */}
+                      族群
                     </div>
                     {periodHeaders.map(header => (
                       <div
@@ -252,7 +272,8 @@ export default function RetentionPage() {
                             {formatDate(cohortPeriod)}
                           </div>
                           <div className="text-xs text-neutral-500 dark:text-neutral-300 mt-1 whitespace-nowrap">
-                            {data.cohorts[cohortPeriod].size.toLocaleString()} users
+                            {/* {data.cohorts[cohortPeriod].size.toLocaleString()} users */}
+                            {data.cohorts[cohortPeriod].size.toLocaleString()}位使用者
                           </div>
                         </div>
                         {/* Retention Cells */}

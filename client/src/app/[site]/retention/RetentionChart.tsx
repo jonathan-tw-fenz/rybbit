@@ -114,7 +114,10 @@ export function RetentionChart({ data, isLoading, mode }: RetentionChartProps) {
   if (!data || chartData.length === 0) {
     return (
       <div className="h-[400px] flex items-center justify-center">
-        <div className="text-neutral-500 dark:text-neutral-400 text-sm">No retention data available</div>
+        <div className="text-neutral-500 dark:text-neutral-400 text-sm">
+          {/* No retention data available */}
+          无留客资料
+        </div>
       </div>
     );
   }
@@ -197,7 +200,8 @@ export function RetentionChart({ data, isLoading, mode }: RetentionChartProps) {
             <ChartTooltip>
               <div className="p-2 text-sm">
                 <div className="font-medium mb-2 text-neutral-700 dark:text-neutral-200">
-                  {mode === "day" ? "Day" : "Week"} {xValue}
+                  {/* {mode === "day" ? "Day" : "Week"} {xValue} */}
+                  第{xValue}{mode === "day" ? "天" : "周"} 
                 </div>
                 <div className="flex flex-col gap-1">
                   {slice.points.map((point: any) => {
