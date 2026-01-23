@@ -216,7 +216,7 @@ export default function UsersPage() {
     }),
     columnHelper.accessor("pageviews", {
       // header: ({ column }) => <SortHeader column={column}>Pageviews</SortHeader>,
-      header: ({ column }) => <SortHeader column={column}>观看页面数</SortHeader>,
+      header: ({ column }) => <SortHeader column={column}>造访页面数</SortHeader>,
       cell: info => <div className="whitespace-nowrap">{info.getValue().toLocaleString()}</div>,
     }),
     columnHelper.accessor("events", {
