@@ -72,7 +72,10 @@ export default function UserPage() {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/${site}/users`}>Users</Link>
+                <Link href={`/${site}/users`}>
+                  {/* Users */}
+                  使用者
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />

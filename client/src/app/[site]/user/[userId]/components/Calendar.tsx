@@ -51,8 +51,10 @@ export const VisitCalendar = ({ sessionCount }: { sessionCount: UserSessionCount
       tooltip={({ value, day }) => {
         return (
           <ChartTooltip className="p-2 flex gap-1">
-            {value}
-            <span className="text-neutral-600 dark:text-neutral-300">session{Number(value) > 1 && "s"} on</span> {day}
+            {/* {value}
+            <span className="text-neutral-600 dark:text-neutral-300">session{Number(value) > 1 && "s"} on</span> {day} */}
+            {day}发生{value}
+            <span className="text-neutral-600 dark:text-neutral-300">个工作阶段</span> 
           </ChartTooltip>
         );
       }}

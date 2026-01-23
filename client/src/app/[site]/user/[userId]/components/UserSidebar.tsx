@@ -96,31 +96,36 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
         <div className="grid grid-cols-2 gap-4">
           <StatCard
             icon={<Files className="w-3 h-3" />}
-            label="Sessions"
+            // label="Sessions"
+            label="工作阶段"
             value={data?.sessions ?? "—"}
             isLoading={isLoading}
           />
           <StatCard
             icon={<PageviewIcon className="w-3 h-3" />}
-            label="Pageviews"
+            // label="Pageviews"
+            label="造访页面数"
             value={data?.pageviews ?? "—"}
             isLoading={isLoading}
           />
           <StatCard
             icon={<EventIcon className="w-3 h-3" />}
-            label="Events"
+            // label="Events"
+            label="事件数"
             value={data?.events ?? "—"}
             isLoading={isLoading}
           />
           <StatCard
             icon={<Clock className="w-3 h-3" />}
-            label="Avg Duration"
+            // label="Avg Duration"
+            label="平均长度"
             value={data?.duration ? formatDuration(data.duration) : "—"}
             isLoading={isLoading}
           />
           <StatCard
             icon={<Calendar className="w-3 h-3" />}
-            label="First Seen"
+            // label="First Seen"
+            label="第一次出现"
             value={
               data?.first_seen
                 ? DateTime.fromSQL(data.first_seen, { zone: "utc" }).setZone(getTimezone()).toLocaleString(DateTime.DATE_MED)
@@ -130,7 +135,8 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
           />
           <StatCard
             icon={<CalendarCheck className="w-3 h-3" />}
-            label="Last Seen"
+            // label="Last Seen"
+            label="最后出现"
             value={
               data?.last_seen
                 ? DateTime.fromSQL(data.last_seen, { zone: "utc" }).setZone(getTimezone()).toLocaleString(DateTime.DATE_MED)
@@ -144,7 +150,8 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
       {/* Location & Device Info */}
       <SidebarCard>
         <h3 className="text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
-          Location & Device
+          {/* Location & Device */}
+          地区与装置
         </h3>
         {isLoading ? (
           <div className="space-y-0">
@@ -200,11 +207,13 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
           <div>
             <InfoRow
               icon={<CountryFlag country={data?.country || ""} className="w-4 h-4" />}
-              label="Country"
+              // label="Country"
+              label="国家"
               value={data?.country ? getCountryName(data.country) : "—"}
             />
             <InfoRow
-              label="Region"
+              // label="Region"
+              label="地区"
               value={
                 <span className="truncate max-w-[160px] inline-block">
                   {data?.region ? getRegionName(data.region) : "—"}
@@ -212,7 +221,11 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
                 </span>
               }
             />
-            <InfoRow label="Language" value={data?.language ? getLanguageName(data.language) : "—"} />
+            <InfoRow 
+              // label="Language" 
+              label="语言" 
+              value={data?.language ? getLanguageName(data.language) : "—"} 
+            />
             <InfoRow
               icon={
                 data?.device_type === "Desktop" ? (
@@ -223,12 +236,14 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
                   <Tablet className="w-4 h-4" />
                 ) : null
               }
-              label="Device"
+              // label="Device"
+              label="装置"
               value={data?.device_type ?? "—"}
             />
             <InfoRow
               icon={<Browser browser={data?.browser || "Unknown"} size={13} />}
-              label="Browser"
+              // label="Browser"
+              label="浏览器"
               value={data?.browser ? `${data.browser}${data.browser_version ? ` v${data.browser_version}` : ""}` : "—"}
             />
             <InfoRow
@@ -241,7 +256,8 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
               }
             />
             <InfoRow
-              label="Screen"
+              // label="Screen"
+              label="萤幕"
               value={data?.screen_width && data?.screen_height ? `${data.screen_width}×${data.screen_height}` : "—"}
             />
           </div>
@@ -251,7 +267,8 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
       {/* Activity Calendar */}
       <SidebarCard className="h-[180px]">
         <h3 className="text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
-          Activity Calendar
+          {/* Activity Calendar */}
+          活动表
         </h3>
         <div className="h-[140px]">
           <VisitCalendar sessionCount={sessionCount} />
@@ -262,7 +279,8 @@ export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: Us
       {isIdentified && customTraits.length > 0 && (
         <SidebarCard>
           <h3 className="text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
-            User Traits
+            {/* User Traits */}
+            使用者资料
           </h3>
           <div className="space-y-1">
             {customTraits.map(([key, value]) => (

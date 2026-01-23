@@ -19,7 +19,10 @@ export function UserTopPages({ userId }: { userId: string }) {
         <Tabs defaultValue="pages" value={tab} onValueChange={value => setTab(value as Tab)}>
           <div className="flex flex-row gap-2 items-center">
             <TabsList>
-              <TabsTrigger value="pages">Top Pages</TabsTrigger>
+              <TabsTrigger value="pages">
+                {/* Top Pages */}
+                页面排行
+              </TabsTrigger>
             </TabsList>
             {/* <TabsList>
               <TabsTrigger value="events">Events</TabsTrigger>
@@ -28,10 +31,12 @@ export function UserTopPages({ userId }: { userId: string }) {
           <TabsContent value="pages">
             <StandardSection
               filterParameter="pathname"
-              title="Pages"
+              // title="Pages"
+              title="页面"
               getValue={e => e.value}
               getKey={e => e.value}
-              getLabel={e => truncateString(e.value, 50) || "Other"}
+              // getLabel={e => truncateString(e.value, 50) || "Other"}
+              getLabel={e => truncateString(e.value, 50) || "其他"}
               getLink={e => `https://${siteMetadata?.domain}${e.value}`}
               expanded={false}
               close={close}
@@ -45,10 +50,12 @@ export function UserTopPages({ userId }: { userId: string }) {
           <TabsContent value="events">
             <StandardSection
               filterParameter="pathname"
-              title="Pages"
+              // title="Pages"
+              title="页面"
               getValue={e => e.value}
               getKey={e => e.value}
-              getLabel={e => truncateString(e.value, 50) || "Other"}
+              // getLabel={e => truncateString(e.value, 50) || "Other"}
+              getLabel={e => truncateString(e.value, 50) || "其他"}
               getLink={e => `https://${siteMetadata?.domain}${e.value}`}
               expanded={false}
               close={close}
