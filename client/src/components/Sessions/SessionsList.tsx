@@ -27,7 +27,8 @@ export function SessionsList({
   onPageChange,
   hasNextPage,
   hasPrevPage,
-  emptyMessage = "Try a different date range or filter",
+  // emptyMessage = "Try a different date range or filter",
+  emptyMessage = "尝试其他时段或变更筛选条件",
   userId,
   identifiedOnly,
   setIdentifiedOnly,
@@ -36,7 +37,8 @@ export function SessionsList({
   if (sessions.length === 0 && !isLoading) {
     return (
       <div className="space-y-3">
-        <NothingFound icon={<Rewind className="w-10 h-10" />} title={"No sessions found"} description={emptyMessage} />
+        {/* <NothingFound icon={<Rewind className="w-10 h-10" />} title={"No sessions found"} description={emptyMessage} /> */}
+        <NothingFound icon={<Rewind className="w-10 h-10" />} title={"无工作阶段"} description={emptyMessage} />
       </div>
     );
   }

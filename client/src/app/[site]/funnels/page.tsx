@@ -87,7 +87,8 @@ export default function FunnelsPage() {
         <SubHeader availableFilters={GOALS_PAGE_FILTERS} />
         <div className="flex justify-between items-center">
           <Input
-            placeholder="Filter funnels"
+            // placeholder="Filter funnels"
+            placeholder="筛选漏斗"
             className="w-48"
             isSearch
             value={searchQuery}
@@ -104,8 +105,10 @@ export default function FunnelsPage() {
           </div>
         ) : error ? (
           <ErrorState
-            title="Failed to load funnels"
-            message="There was a problem fetching the funnels. Please try again later."
+            // title="Failed to load funnels"
+            // message="There was a problem fetching the funnels. Please try again later."
+            title="载入漏斗失败"
+            message="载入漏斗时发生错误，请稍后再试。"
           />
         ) : filteredFunnels?.length ? (
           <div className="space-y-4">
@@ -116,14 +119,18 @@ export default function FunnelsPage() {
         ) : funnels?.length ? (
           <NothingFound
             icon={<Funnel className="w-10 h-10" />}
-            title={"No funnels found"}
-            description={`No funnels match "${searchQuery}"`}
+            // title={"No funnels found"}
+            // description={`No funnels match "${searchQuery}"`}
+            title={"无漏斗"}
+            description={`没有漏斗符合"${searchQuery}"`}
           />
         ) : (
           <NothingFound
             icon={<Funnel className="w-10 h-10" />}
-            title={"No funnels yet"}
-            description={"Create your first funnel to track conversions through your site's user journey"}
+            // title={"No funnels yet"}
+            // description={"Create your first funnel to track conversions through your site's user journey"}
+            title={"尚无漏斗"}
+            description={"创建第一个漏斗，开始追踪用户行为与转换"}
             action={<CreateFunnelDialog />}
           />
         )}

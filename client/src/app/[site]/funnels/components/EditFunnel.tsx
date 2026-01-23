@@ -19,7 +19,8 @@ export function EditFunnelDialog({ funnel, isOpen, onClose, isCloneMode = false 
   const [steps, setSteps] = useState<FunnelStep[]>(funnel.steps);
 
   // Funnel name - initialized from funnel, with "(Copy)" suffix for clone mode
-  const [name, setName] = useState(isCloneMode ? `${funnel.name} (Copy)` : funnel.name);
+  // const [name, setName] = useState(isCloneMode ? `${funnel.name} (Copy)` : funnel.name);
+  const [name, setName] = useState(isCloneMode ? `${funnel.name} (复制)` : funnel.name);
 
   // Funnel analysis query
   const {
@@ -42,7 +43,8 @@ export function EditFunnelDialog({ funnel, isOpen, onClose, isCloneMode = false 
     // Validate steps have values
     const hasEmptySteps = steps.some(step => !step.value);
     if (hasEmptySteps) {
-      alert("All steps must have values");
+      // alert("All steps must have values");
+      alert("不能有步骤为空");
       return;
     }
   };
@@ -51,14 +53,16 @@ export function EditFunnelDialog({ funnel, isOpen, onClose, isCloneMode = false 
   const handleUpdateFunnel = () => {
     // Validate name
     if (!name.trim()) {
-      alert("Please enter a funnel name");
+      // alert("Please enter a funnel name");
+      alert("请输入漏斗名称");
       return;
     }
 
     // Validate steps have values
     const hasEmptySteps = steps.some(step => !step.value);
     if (hasEmptySteps) {
-      alert("All steps must have values");
+      // alert("All steps must have values");
+      alert("不能有步骤为空");
       return;
     }
 
@@ -74,11 +78,13 @@ export function EditFunnelDialog({ funnel, isOpen, onClose, isCloneMode = false 
           // Close dialog on successful save
           onClose();
           // Show success message
-          toast?.success(isCloneMode ? "Funnel cloned successfully" : "Funnel updated successfully");
+          // toast?.success(isCloneMode ? "Funnel cloned successfully" : "Funnel updated successfully"); 
+          toast?.success(isCloneMode ? "漏斗复制成功" : "漏斗更新成功");
         },
         onError: error => {
           // Show error but don't close dialog
-          toast?.error(`Failed to ${isCloneMode ? "clone" : "update"} funnel: ${error.message}`);
+          // toast?.error(`Failed to ${isCloneMode ? "clone" : "update"} funnel: ${error.message}`);
+          toast?.error(`${isCloneMode ? "复制" : "更新"}漏斗失败: ${error.message}`);
         },
       }
     );
@@ -94,7 +100,10 @@ export function EditFunnelDialog({ funnel, isOpen, onClose, isCloneMode = false 
     <Dialog open={isOpen} onOpenChange={open => !open && onClose()}>
       <DialogContent className="max-w-[95vw]">
         <DialogHeader>
-          <DialogTitle>{isCloneMode ? "Clone Funnel" : "Edit Funnel"}</DialogTitle>
+          <DialogTitle>
+            {/* {isCloneMode ? "Clone Funnel" : "Edit Funnel"} */}
+            {isCloneMode ? "复制漏斗" : "编辑漏斗"}
+          </DialogTitle>
         </DialogHeader>
 
         <FunnelForm
@@ -105,7 +114,8 @@ export function EditFunnelDialog({ funnel, isOpen, onClose, isCloneMode = false 
           onSave={handleUpdateFunnel}
           onCancel={onClose}
           onQuery={handleQueryFunnel}
-          saveButtonText={isCloneMode ? "Clone Funnel" : "Update Funnel"}
+          // saveButtonText={isCloneMode ? "Clone Funnel" : "Update Funnel"}
+          saveButtonText={isCloneMode ? "复制漏斗" : "编辑漏斗"}
           isSaving={isSaving}
           isError={isError}
           isPending={isPending}

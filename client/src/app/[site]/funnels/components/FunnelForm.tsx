@@ -211,9 +211,13 @@ export function FunnelForm({
     funnelArea = (
       <div className="flex items-center justify-center bg-neutral-50 dark:bg-neutral-900 rounded-lg h-full">
         <div className="text-center p-6">
-          <div className="text-lg font-medium mb-2">Funnel Preview</div>
+          <div className="text-lg font-medium mb-2">
+            {/* Funnel Preview */}
+            漏斗预览
+          </div>
           <p className="text-sm text-neutral-500">
-            Configure your funnel steps and click "Query Funnel" to preview results
+            {/* Configure your funnel steps and click "Query Funnel" to preview results */}
+            设定漏斗步骤后，点击「漏斗查询」来预览漏斗结果
           </p>
         </div>
       </div>
@@ -234,8 +238,12 @@ export function FunnelForm({
         {/* Left side: Funnel configuration form */}
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-medium mb-1 block">Funnel Name</label>
-            <Input value={name} onChange={e => setName(e.target.value)} placeholder="Enter funnel name" />
+            <label className="text-sm font-medium mb-1 block">
+              {/* Funnel Name */}
+              漏斗名称
+            </label>
+            {/* <Input value={name} onChange={e => setName(e.target.value)} placeholder="Enter funnel name" /> */}
+            <Input value={name} onChange={e => setName(e.target.value)} placeholder="输入漏斗名称" />
           </div>
 
           <div className="max-h-[calc(100vh-300px)] overflow-y-auto">
@@ -269,13 +277,16 @@ export function FunnelForm({
                           <SelectValue placeholder="Type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="page">Path</SelectItem>
-                          <SelectItem value="event">Event</SelectItem>
+                          {/* <SelectItem value="page">Path</SelectItem> */}
+                          {/* <SelectItem value="event">Event</SelectItem> */}
+                          <SelectItem value="page">路径</SelectItem>
+                          <SelectItem value="event">事件</SelectItem>
                         </SelectContent>
                       </Select>
                       <InputWithSuggestions
                         suggestions={step.type === "page" ? pathSuggestions : eventSuggestions}
-                        placeholder={step.type === "page" ? "Path (e.g. /pricing)" : "Event name"}
+                        // placeholder={step.type === "page" ? "Path (e.g. /pricing)" : "Event name"}
+                        placeholder={step.type === "page" ? "路径(e.g. /pricing)" : "事件名称"}
                         value={step.value}
                         className="border-neutral-300 dark:border-neutral-700 w-[260px]"
                         onChange={e => updateStep(index, "value", e.target.value)}
@@ -289,7 +300,8 @@ export function FunnelForm({
                             newExpandedSteps[index] = !newExpandedSteps[index];
                             setExpandedSteps(newExpandedSteps);
                           }}
-                          title={expandedSteps[index] ? "Hide advanced options" : "Show advanced options"}
+                          // title={expandedSteps[index] ? "Hide advanced options" : "Show advanced options"}
+                          title={expandedSteps[index] ? "隐藏进阶选项" : "显示进阶选项"}
                         >
                           {expandedSteps[index] ? (
                             <ChevronUp className="h-4 w-4" />
@@ -314,13 +326,15 @@ export function FunnelForm({
                         <div className="flex gap-2">
                           <InputWithSuggestions
                             suggestions={hostnameSuggestions}
-                            placeholder="Hostname (optional)"
+                            // placeholder="Hostname (optional)"
+                            placeholder="网域名称(选填)"
                             value={step.hostname || ""}
                             className="border-neutral-300 dark:border-neutral-700 w-40"
                             onChange={e => updateStep(index, "hostname", e.target.value)}
                           />
                           <Input
-                            placeholder="Label (optional)"
+                            // placeholder="Label (optional)"
+                            placeholder="名称(选填)"
                             className="border-neutral-300 dark:border-neutral-700 grow"
                             value={step.name || ""}
                             onChange={e => updateStep(index, "name", e.target.value)}
@@ -335,7 +349,8 @@ export function FunnelForm({
                               id={`use-properties-${index}`}
                             />
                             <Label htmlFor={`use-properties-${index}`}>
-                              {step.type === "page" ? "Filter by URL parameter" : "Filter by event property"}
+                              {/* {step.type === "page" ? "Filter by URL parameter" : "Filter by event property"} */}
+                              {step.type === "page" ? "以URL参数筛选" : "以事件属性筛选"}
                             </Label>
                           </div>
 
@@ -422,7 +437,8 @@ export function FunnelForm({
                                 }}
                               >
                                 <Plus className="h-4 w-4" />
-                                New {step.type === "page" ? "Parameter" : "Property"}
+                                {/* New {step.type === "page" ? "Parameter" : "Property"} */}
+                                新增{step.type === "page" ? "参数" : "属性"}
                               </Button>
                             </div>
                           )}
@@ -434,7 +450,8 @@ export function FunnelForm({
               })}
             </Reorder.Group>
             <Button onClick={addStep} size="sm" className="mt-2">
-              <Plus className="h-4 w-4" /> Add Step
+              {/* <Plus className="h-4 w-4" /> Add Step */}
+              <Plus className="h-4 w-4" /> 新增步骤
             </Button>
           </div>
         </div>
@@ -443,25 +460,30 @@ export function FunnelForm({
 
       <div className="flex justify-between items-center">
         <span className="text-xs text-neutral-600 dark:text-neutral-500">
-          Use * to match a single path segment (e.g., /blog/*) or ** to match multiple segments (e.g., /docs/**/intro)
+          {/* Use * to match a single path segment (e.g., /blog/*) or ** to match multiple segments (e.g., /docs/**\/intro) */}
+          用 * 与单一片段配对(e.g., /blog/*)或 ** 与多个片段配对(e.g., /docs/**/intro)
         </span>
         <div className="text-sm text-red-500">
           {(() => {
             if (isError) {
-              return error instanceof Error ? error.message : "An error occurred";
+              // return error instanceof Error ? error.message : "An error occurred";
+              return error instanceof Error ? error.message : "发生错误";
             } else if (saveError) {
-              return saveError instanceof Error ? saveError.message : "An error occurred while saving";
+              // return saveError instanceof Error ? saveError.message : "An error occurred while saving";
+              return saveError instanceof Error ? saveError.message : "存档时发生错误";
             }
             return null;
           })()}
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={onCancel}>
-            Cancel
+            {/* Cancel */}
+            取消
           </Button>
           <Button onClick={onSave} disabled={isSaving} variant="success">
             <Save className="h-4 w-4" />
-            {isSaving ? "Saving..." : saveButtonText}
+            {/* {isSaving ? "Saving..." : saveButtonText} */}
+            {isSaving ? "存档中..." : saveButtonText}
           </Button>
         </div>
       </div>

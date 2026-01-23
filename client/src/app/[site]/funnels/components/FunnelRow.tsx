@@ -53,9 +53,11 @@ export function FunnelRow({ funnel, index }: FunnelRowProps) {
   const handleDeleteFunnel = async () => {
     try {
       await deleteFunnel(funnel.id);
-      toast.success("Funnel deleted successfully");
+      // toast.success("Funnel deleted successfully");
+      toast.success("成功删除漏斗");
     } catch (error) {
-      console.error("Error deleting funnel:", error);
+      // console.error("Error deleting funnel:", error);
+      console.error("删除漏斗时发生错误:", error);
       throw error; // Let the ConfirmationModal handle the error display
     }
   };
@@ -127,7 +129,10 @@ export function FunnelRow({ funnel, index }: FunnelRowProps) {
                   <Edit className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Edit Funnel</TooltipContent>
+              <TooltipContent>
+                {/* Edit Funnel */}
+                编辑漏斗
+              </TooltipContent>
             </Tooltip>
 
             {/* Clone button */}
@@ -144,7 +149,10 @@ export function FunnelRow({ funnel, index }: FunnelRowProps) {
                   <Copy className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Clone Funnel</TooltipContent>
+              <TooltipContent>
+                {/* Clone Funnel */}
+                复制漏斗
+              </TooltipContent>
             </Tooltip>
 
             {/* Delete button */}
@@ -161,7 +169,10 @@ export function FunnelRow({ funnel, index }: FunnelRowProps) {
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Delete Funnel</TooltipContent>
+              <TooltipContent>
+                {/* Delete Funnel */}
+                删除漏斗
+              </TooltipContent>
             </Tooltip>
 
             <Button variant="ghost" size="icon" onClick={handleExpand}>
@@ -179,12 +190,16 @@ export function FunnelRow({ funnel, index }: FunnelRowProps) {
               <ThreeDotLoader className="h-[400px]" />
             ) : isError ? (
               <div className="text-red-500 p-4 text-center">
-                Error loading funnel: {error instanceof Error ? error.message : "Unknown error"}
+                {/* Error loading funnel: {error instanceof Error ? error.message : "Unknown error"} */}
+                载入漏斗时发生错误: {error instanceof Error ? error.message : "Unknown error"}
               </div>
             ) : data && data.length > 0 ? (
               <Funnel data={data} steps={funnel.steps} isError={isError} error={error} isPending={isPending} />
             ) : (
-              <div className="text-center p-6 text-neutral-500">No funnel data available</div>
+              <div className="text-center p-6 text-neutral-500">
+                {/* No funnel data available */}
+                无漏斗资料
+              </div>
             )}
           </div>
         </div>
@@ -192,13 +207,16 @@ export function FunnelRow({ funnel, index }: FunnelRowProps) {
 
       {/* Delete Confirmation Modal */}
       <ConfirmationModal
-        title="Delete Funnel"
-        description={`Are you sure you want to delete "${funnel.name}"? This action cannot be undone.`}
+        // title="Delete Funnel"
+        // description={`Are you sure you want to delete "${funnel.name}"? This action cannot be undone.`}
+        title="删除漏斗"
+        description={`确定要删除"${funnel.name}"? 此动作无法复原`}
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         onConfirm={handleDeleteFunnel}
         primaryAction={{
-          children: isDeleting ? "Deleting..." : "Delete",
+          // children: isDeleting ? "Deleting..." : "Delete",
+          children: isDeleting ? "删除中..." : "删除",
           variant: "destructive",
         }}
       />

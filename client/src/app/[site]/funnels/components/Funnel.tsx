@@ -122,11 +122,16 @@ function FunnelStepComponent({ step, index, steps, chartData, firstStep, siteId 
         <div className="shrink-0 min-w-[130px] mr-4 space-y-1">
           <div className="flex items-baseline">
             <span className="text-base font-semibold">{step.visitors.toLocaleString()}</span>
-            <span className="text-sm text-neutral-500 dark:text-neutral-400 ml-1">sessions</span>
+            <span className="text-sm text-neutral-500 dark:text-neutral-400 ml-1">
+              {/* sessions */}
+              工作阶段
+            </span>
           </div>
           {index !== 0 && (
             <div className="flex items-baseline text-orange-500 text-xs font-medium">
-              {droppedFromPrevious.toLocaleString()} dropped
+              {droppedFromPrevious.toLocaleString()}
+               {/* dropped */}
+               脱落
             </div>
           )}
         </div>
@@ -162,9 +167,11 @@ function FunnelStepComponent({ step, index, steps, chartData, firstStep, siteId 
         <div className=" ml-4 p-4">
           <Tabs value={currentTab} onValueChange={val => setCurrentTab(val as "reached" | "dropped")}>
             <TabsList className="mb-1">
-              <TabsTrigger value="reached">Reached ({step.visitors.toLocaleString()})</TabsTrigger>
+              {/* <TabsTrigger value="reached">Reached ({step.visitors.toLocaleString()})</TabsTrigger> */}
+              <TabsTrigger value="reached">到达 ({step.visitors.toLocaleString()})</TabsTrigger>
               {!isFirstStep && (
-                <TabsTrigger value="dropped">Dropped Off ({droppedFromPrevious.toLocaleString()})</TabsTrigger>
+                // <TabsTrigger value="dropped">Dropped Off ({droppedFromPrevious.toLocaleString()})</TabsTrigger>
+                <TabsTrigger value="dropped">脱落 ({droppedFromPrevious.toLocaleString()})</TabsTrigger>
               )}
             </TabsList>
 
@@ -176,7 +183,8 @@ function FunnelStepComponent({ step, index, steps, chartData, firstStep, siteId 
                 onPageChange={setReachedPage}
                 hasNextPage={hasNextReached}
                 hasPrevPage={hasPrevReached}
-                emptyMessage="No sessions reached this step in the selected time period."
+                // emptyMessage="No sessions reached this step in the selected time period."
+                emptyMessage="此时段没有工作阶段抵达此步骤"
               />
             </TabsContent>
 
@@ -189,7 +197,8 @@ function FunnelStepComponent({ step, index, steps, chartData, firstStep, siteId 
                   onPageChange={setDroppedPage}
                   hasNextPage={hasNextDropped}
                   hasPrevPage={hasPrevDropped}
-                  emptyMessage="No sessions dropped off before reaching this step in the selected time period."
+                  // emptyMessage="No sessions dropped off before reaching this step in the selected time period."
+                  emptyMessage="此时段没有工作阶段在抵达此步骤前脱落"
                 />
               </TabsContent>
             )}
@@ -223,7 +232,8 @@ export function Funnel({ data, steps, isError, error, isPending }: FunnelProps) 
       {isError ? (
         <div className="h-[400px] flex items-center justify-center">
           <div className="text-red-500">
-            Error: {error instanceof Error ? error.message : "Failed to analyze funnel"}
+            {/* Error: {error instanceof Error ? error.message : "Failed to analyze funnel"} */}
+            错误: {error instanceof Error ? error.message : "漏斗分析失败"}
           </div>
         </div>
       ) : data && chartData.length > 0 ? (
@@ -243,7 +253,8 @@ export function Funnel({ data, steps, isError, error, isPending }: FunnelProps) 
       ) : (
         <div className="h-[400px] flex items-center justify-center">
           <div className="text-neutral-500 dark:text-neutral-400 text-sm">
-            {isPending ? "Analyzing funnel..." : "Configure your funnel steps and click 'Analyze Funnel'"}
+            {/* {isPending ? "Analyzing funnel..." : "Configure your funnel steps and click 'Analyze Funnel'"} */}
+            {isPending ? "漏斗分析中..." : "设定漏斗步骤后点击「分析漏斗」"}
           </div>
         </div>
       )}
@@ -251,7 +262,10 @@ export function Funnel({ data, steps, isError, error, isPending }: FunnelProps) 
         <div className="flex items-center gap-4 mt-3 text-xs text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center">
             <div className="w-3 h-3 bg-emerald-500/70 rounded-sm mr-1"></div>
-            <span>Overall conversion</span>
+            <span>
+              {/* Overall conversion */}
+              平均转换
+            </span>
           </div>
           <div className="flex items-center">
             <div
@@ -266,7 +280,10 @@ export function Funnel({ data, steps, isError, error, isPending }: FunnelProps) 
                     )`,
               }}
             ></div>
-            <span>Conversion from previous step</span>
+            <span>
+              {/* Conversion from previous step */}
+              上一步转换
+            </span>
           </div>
         </div>
       </div>

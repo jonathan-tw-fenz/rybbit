@@ -19,7 +19,8 @@ export function CreateFunnelDialog() {
   ]);
 
   // Funnel name
-  const [name, setName] = useState("New Funnel");
+  // const [name, setName] = useState("New Funnel");
+  const [name, setName] = useState("新漏斗");
 
   // Funnel analysis query
   const {
@@ -44,7 +45,8 @@ export function CreateFunnelDialog() {
     // Validate steps have values
     const hasEmptySteps = steps.some(step => !step.value);
     if (hasEmptySteps) {
-      alert("All steps must have values");
+      // alert("All steps must have values");
+      alert("不能有步骤为空");
       return;
     }
   };
@@ -53,14 +55,16 @@ export function CreateFunnelDialog() {
   const handleSaveFunnel = () => {
     // Validate name
     if (!name.trim()) {
-      alert("Please enter a funnel name");
+      // alert("Please enter a funnel name");
+      alert("请输入漏斗名称");
       return;
     }
 
     // Validate steps have values
     const hasEmptySteps = steps.some(step => !step.value);
     if (hasEmptySteps) {
-      alert("All steps must have values");
+      // alert("All steps must have values");
+      alert("不能有步骤为空");
       return;
     }
 
@@ -75,11 +79,13 @@ export function CreateFunnelDialog() {
           // Close dialog on successful save
           setOpen(false);
           // Optional: Show success message
-          toast?.success("Funnel saved successfully");
+          // toast?.success("Funnel saved successfully");
+          toast?.success("漏斗储存成功");
         },
         onError: error => {
           // Show error but don't close dialog
-          toast?.error(`Failed to save funnel: ${error.message}`);
+          // toast?.error(`Failed to save funnel: ${error.message}`);
+          toast?.error(`漏斗储存失败: ${error.message}`);
         },
       }
     );
@@ -93,7 +99,8 @@ export function CreateFunnelDialog() {
         { type: "page", value: "/", name: "Homepage" },
         { type: "page", value: "", name: "" },
       ]);
-      setName("New Funnel");
+      // setName("New Funnel");
+      setName("新漏斗");
     }
   };
 
@@ -101,12 +108,16 @@ export function CreateFunnelDialog() {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button className="flex gap-2">
-          <Plus className="w-4 h-4" /> Create Funnel
+          {/* <Plus className="w-4 h-4" /> Create Funnel */}
+          <Plus className="w-4 h-4" /> 创建漏斗
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[95vw]">
         <DialogHeader>
-          <DialogTitle>Create Funnel</DialogTitle>
+          <DialogTitle>
+            {/* Create Funnel */}
+            创建漏斗
+          </DialogTitle>
         </DialogHeader>
 
         <FunnelForm
@@ -117,7 +128,8 @@ export function CreateFunnelDialog() {
           onSave={handleSaveFunnel}
           onCancel={() => setOpen(false)}
           onQuery={handleQueryFunnel}
-          saveButtonText="Save Funnel"
+          // saveButtonText="Save Funnel"
+          saveButtonText="储存漏斗"
           isSaving={isSaving}
           isError={isError}
           isPending={isPending}
