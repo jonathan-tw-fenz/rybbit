@@ -40,7 +40,10 @@ export default function JourneysPage() {
         <SubHeader availableFilters={JOURNEY_PAGE_FILTERS} />
         <div className="flex items-center gap-6 mb-2">
           <div className="flex items-center gap-3 w-[180px]">
-            <span className="text-sm text-neutral-600 dark:text-neutral-300 whitespace-nowrap">{steps} steps</span>
+            <span className="text-sm text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
+              {/* {steps} steps */}
+              {steps}步骤
+            </span>
             <Slider
               value={[steps]}
               onValueChange={([value]) => setSteps(value)}
@@ -52,7 +55,8 @@ export default function JourneysPage() {
           </div>
           <div className="flex items-center gap-3 w-[200px]">
             <span className="text-sm text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
-              {maxJourneys} journeys
+              {/* {maxJourneys} journeys */}
+              {maxJourneys}历程
             </span>
             <Slider
               value={[maxJourneys]}
@@ -71,7 +75,10 @@ export default function JourneysPage() {
               <div className="absolute inset-0 bg-white/30 dark:bg-neutral-900/30 backdrop-blur-sm z-10 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-2">
                   <div className="h-8 w-8 rounded-full border-2 border-accent-400 border-t-transparent animate-spin"></div>
-                  <span className="text-sm text-neutral-600 dark:text-neutral-300">Loading journey data...</span>
+                  <span className="text-sm text-neutral-600 dark:text-neutral-300">
+                    {/* Loading journey data... */}
+                    历程资料载入中...
+                  </span>
                 </div>
               </div>
             )}
@@ -84,10 +91,14 @@ export default function JourneysPage() {
                     clipPath: "polygon(0 0, 10px 50%, 0 100%, calc(100% - 10px) 100%, 100% 50%, calc(100% - 10px) 0)",
                   }}
                 >
-                  <span className="ml-2 whitespace-nowrap text-neutral-700 dark:text-neutral-200">Step {i + 1}</span>
+                  <span className="ml-2 whitespace-nowrap text-neutral-700 dark:text-neutral-200">
+                    {/* Step {i + 1} */}
+                    第{i + 1}步
+                  </span>
                   <Input
                     inputSize="sm"
-                    placeholder="Path filter"
+                    // placeholder="Path filter"
+                    placeholder="筛选路径"
                     value={stepFilters[i] || ""}
                     onChange={e => {
                       const newFilters = { ...stepFilters };
@@ -114,16 +125,28 @@ export default function JourneysPage() {
             {error && (
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>Failed to load journey data. Please try again.</AlertDescription>
+                <AlertTitle>
+                  {/* Error */}
+                  错误
+                </AlertTitle>
+                <AlertDescription>
+                  {/* Failed to load journey data. Please try again. */}
+                  历程资料载入失败，请稍后再试
+                </AlertDescription>
               </Alert>
             )}
 
             {data?.journeys?.length === 0 && !isLoading && !error && (
               <Alert>
                 <AlertCircle className="h-4 w-4" />
-                <AlertTitle>No Data</AlertTitle>
-                <AlertDescription>No journey data found for the selected criteria.</AlertDescription>
+                <AlertTitle>
+                  {/* No Data */}
+                  无资料
+                </AlertTitle>
+                <AlertDescription>
+                  {/* No journey data found for the selected criteria. */}
+                  目前条件下并无任何历程
+                </AlertDescription>
               </Alert>
             )}
           </div>
