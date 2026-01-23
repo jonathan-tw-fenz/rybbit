@@ -103,7 +103,7 @@ export function SessionCard({ session, onClick, userId, expandedByDefault }: Ses
                 </Badge>
               </TooltipTrigger>
               {/* <TooltipContent>Pageviews</TooltipContent> */}
-              <TooltipContent>观看数</TooltipContent>
+              <TooltipContent>观看頁面数</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
