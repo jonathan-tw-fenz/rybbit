@@ -79,7 +79,8 @@ export function OutboundLinksList({ outboundLinks, isLoading, size = "small" }: 
     return (
       <div className="text-neutral-500 dark:text-neutral-300 w-full text-center mt-6 flex flex-row gap-2 items-center justify-center">
         <Info className="w-5 h-5" />
-        No Data
+        {/* No Data */}
+        无资料
       </div>
     );
   }

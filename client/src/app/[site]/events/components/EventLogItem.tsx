@@ -50,7 +50,8 @@ export function EventLogItem({ event }: EventLogItemProps) {
     try {
       eventProperties = JSON.parse(event.properties);
     } catch (e) {
-      console.error("Failed to parse event properties:", e);
+      // console.error("Failed to parse event properties:", e);
+      console.error("读取事件资料发生错误:", e);
     }
   }
 
@@ -89,7 +90,10 @@ export function EventLogItem({ event }: EventLogItemProps) {
                     </div>
                   </Link>
                 ) : (
-                  <div className="text-sm font-medium truncate text-purple-400">Outbound Link</div>
+                  <div className="text-sm font-medium truncate text-purple-400">
+                    {/* Outbound Link */}
+                    外部连结
+                  </div>
                 )
               ) : (
                 <div className="text-sm font-medium truncate">{event.event_name}</div>
@@ -117,7 +121,8 @@ export function EventLogItem({ event }: EventLogItemProps) {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>{event.browser || "Unknown browser"}</p>
+                  {/* <p>{event.browser || "Unknown browser"}</p> */}
+                  <p>{event.browser || "未知浏览器"}</p>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -127,7 +132,8 @@ export function EventLogItem({ event }: EventLogItemProps) {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>{event.operating_system || "Unknown OS"}</p>
+                  {/* <p>{event.operating_system || "Unknown OS"}</p> */}
+                  <p>{event.operating_system || "未知OS"}</p>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -137,7 +143,8 @@ export function EventLogItem({ event }: EventLogItemProps) {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>{event.device_type || "Unknown device"}</p>
+                  {/* <p>{event.device_type || "Unknown device"}</p> */}
+                  <p>{event.device_type || "未知装置"}</p>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -151,7 +158,8 @@ export function EventLogItem({ event }: EventLogItemProps) {
                   </span>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>View user profile</p>
+                  {/* <p>View user profile</p> */}
+                  <p>检视使用者资料</p>
                 </TooltipContent>
               </Tooltip>
             </Link>

@@ -26,7 +26,10 @@ export default function EventsPage() {
         <Card className="h-auto lg:h-full">
           <CardHeader>
 
-            <CardTitle>Custom Events</CardTitle>
+            <CardTitle>
+              {/* Custom Events */}
+              自定事件
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <EventList events={eventNamesData || []} isLoading={isLoadingEventNames} size="large" />
@@ -35,7 +38,10 @@ export default function EventsPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Event Log</CardTitle>
+            <CardTitle>
+              {/* Event Log */}
+              事件列表
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <EventLog />

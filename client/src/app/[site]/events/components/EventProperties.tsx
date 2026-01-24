@@ -23,7 +23,8 @@ export function EventProperties({ properties, isLoading, selectedEvent, size = "
     return (
       <div className="text-neutral-600 dark:text-neutral-300 w-full text-center py-8 flex flex-col gap-2 items-center justify-center">
         <Info className="w-6 h-6" />
-        <p>Select an event to view its properties</p>
+        {/* <p>Select an event to view its properties</p> */}
+        <p>点击事件可检视事件的属性</p>
       </div>
     );
   }
@@ -32,7 +33,8 @@ export function EventProperties({ properties, isLoading, selectedEvent, size = "
     return (
       <div className="text-neutral-600 dark:text-neutral-300 w-full text-center py-8 flex flex-col gap-2 items-center justify-center">
         <Info className="w-6 h-6" />
-        <p>No properties found for this event</p>
+        {/* <p>No properties found for this event</p> */}
+        <p>此事件无内部属性</p>
       </div>
     );
   }

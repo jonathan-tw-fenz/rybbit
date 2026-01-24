@@ -94,7 +94,10 @@ export function OutboundLinksDialog({ outboundLinks, expanded, close }: Outbound
     <ResponsiveDialog open={expanded} onOpenChange={close}>
       <ResponsiveDialogContent className="max-w-[1000px] w-[calc(100vw-2rem)] p-2 sm:p-4 space-y-2">
         <ResponsiveDialogHeader>
-          <ResponsiveDialogTitle>Outbound Links</ResponsiveDialogTitle>
+          <ResponsiveDialogTitle>
+            {/* Outbound Links */}
+            外部连结
+          </ResponsiveDialogTitle>
         </ResponsiveDialogHeader>
         <div className="relative mb-2">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-600 dark:text-neutral-400" />
@@ -116,7 +119,8 @@ export function OutboundLinksDialog({ outboundLinks, expanded, close }: Outbound
                     onClick={() => toggleSort("url")}
                   >
                     <div className="flex items-center gap-1">
-                      Outbound Link
+                      {/* Outbound Link */}
+                      外部连结
                       {sortKey === "url" &&
                         (sortDesc ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
                     </div>
@@ -126,7 +130,8 @@ export function OutboundLinksDialog({ outboundLinks, expanded, close }: Outbound
                     onClick={() => toggleSort("count")}
                   >
                     <div className="flex items-center gap-1 justify-end">
-                      Clicks
+                      {/* Clicks */}
+                      点击数
                       {sortKey === "count" &&
                         (sortDesc ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
                     </div>
@@ -136,7 +141,8 @@ export function OutboundLinksDialog({ outboundLinks, expanded, close }: Outbound
                     onClick={() => toggleSort("percentage")}
                   >
                     <div className="flex items-center gap-1 justify-end">
-                      Click %
+                      {/* Click % */}
+                      点击率 %
                       {sortKey === "percentage" &&
                         (sortDesc ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
                     </div>
@@ -146,7 +152,8 @@ export function OutboundLinksDialog({ outboundLinks, expanded, close }: Outbound
                     onClick={() => toggleSort("lastClicked")}
                   >
                     <div className="flex items-center gap-1 justify-end">
-                      Last Clicked
+                      {/* Last Clicked */}
+                      最后点击
                       {sortKey === "lastClicked" &&
                         (sortDesc ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
                     </div>
@@ -201,12 +208,16 @@ export function OutboundLinksDialog({ outboundLinks, expanded, close }: Outbound
               <div ref={ref} className="py-4 flex justify-center">
                 <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 text-xs">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Loading more...
+                  {/* Loading more... */}
+                  载入中...
                 </div>
               </div>
             )}
             {!hasMore && (
-              <div className="py-4 text-center text-neutral-500 dark:text-neutral-500 text-xs">All items loaded</div>
+              <div className="py-4 text-center text-neutral-500 dark:text-neutral-500 text-xs">
+                  {/* All items loaded */}
+                  已载入所有资料
+              </div>
             )}
           </div>
         </div>

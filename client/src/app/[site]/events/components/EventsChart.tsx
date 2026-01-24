@@ -146,7 +146,8 @@ export function EventsChart() {
         <SelectContent size="sm">
           {EVENT_LIMIT_OPTIONS.map(option => (
             <SelectItem key={option} value={String(option)} size="sm">
-              Top {option}
+              {/* Top {option} */}
+              前{option}
             </SelectItem>
           ))}
         </SelectContent>
@@ -160,11 +161,15 @@ export function EventsChart() {
       {isFetching && <CardLoader />}
       <CardHeader className="flex flex-col gap-0 pb-1">
         <div className="flex items-start gap-2">
-          <CardTitle className="flex-1">Custom Events Over Time</CardTitle>
+          <CardTitle className="flex-1">
+            {/* Custom Events Over Time */}
+            自定事件与时间关联
+          </CardTitle>
           <div className="hidden items-center gap-2 sm:flex">{controls}</div>
         </div>
         <div className="mt-2 flex w-full flex-wrap items-center gap-2 sm:-mt-1">
-          <CardDescription className="mt-0">{eventLimit === 1 ? "Top event" : `Top ${eventLimit} events`}</CardDescription>
+          {/* <CardDescription className="mt-0">{eventLimit === 1 ? "Top event" : `Top ${eventLimit} events`}</CardDescription> */}
+          <CardDescription className="mt-0">{eventLimit === 1 ? "最多事件" : `前${eventLimit}事件`}</CardDescription>
           <div className="ml-auto flex items-center gap-2 sm:hidden">{controls}</div>
         </div>
       </CardHeader>
@@ -198,15 +203,19 @@ export function EventsChart() {
         ) : series.length === 0 ? (
           <div className="h-[260px] w-full flex items-center justify-center">
             <div className="text-center text-neutral-500">
-              <p className="text-sm font-medium">No custom event data available</p>
-              <p className="text-xs">Try adjusting your date range or filters</p>
+              {/* <p className="text-sm font-medium">No custom event data available</p>
+              <p className="text-xs">Try adjusting your date range or filters</p> */}
+              <p className="text-sm font-medium">无自定事件资料e</p>
+              <p className="text-xs">尝试调整时段与筛选设定</p>
             </div>
           </div>
         ) : isAllHidden ? (
           <div className="h-[260px] w-full flex items-center justify-center">
             <div className="text-center text-neutral-500">
-              <p className="text-sm font-medium">All event series hidden</p>
-              <p className="text-xs">Click a legend item to show it</p>
+              {/* <p className="text-sm font-medium">All event series hidden</p>
+              <p className="text-xs">Click a legend item to show it</p> */}
+              <p className="text-sm font-medium">全事件遮蔽</p>
+              <p className="text-xs">点击事件以显示</p>
             </div>
           </div>
         ) : (

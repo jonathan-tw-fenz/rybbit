@@ -45,14 +45,17 @@ export function EventLog() {
   if (isError) {
     return (
       <ErrorState
-        title="Failed to load events"
-        message="There was a problem fetching the events. Please try again later."
+        // title="Failed to load events"
+        // message="There was a problem fetching the events. Please try again later."
+        title="载入事件失败"
+        message="载入事件时发生错误，请稍后再试"
       />
     );
   }
 
   if (allEvents.length === 0) {
-    return <NothingFound title={"No events found"} description={"Try a different date range or filter"} />;
+    // return <NothingFound title={"No events found"} description={"Try a different date range or filter"} />;
+    return <NothingFound title={"无事件"} description={"请尝试别的时段或筛选条件"} />;
   }
 
   return (
@@ -74,7 +77,8 @@ export function EventLog() {
       {/* Pagination info */}
       {data?.pages[0]?.pagination && (
         <div className="text-center text-xs text-neutral-500 dark:text-neutral-400 pt-2">
-          Showing {allEvents.length} of {formatter(data.pages[0].pagination.total)} events
+          {/* Showing {allEvents.length} of {formatter(data.pages[0].pagination.total)} events */}
+          显示第{allEvents.length}个事件，共{formatter(data.pages[0].pagination.total)}个
         </div>
       )}
     </ScrollArea>
