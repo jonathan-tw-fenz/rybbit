@@ -106,7 +106,8 @@ export default function Errors() {
           <ErrorListSkeleton count={pagination.pageSize} />
         ) : isErrorErrors ? (
           <div className="text-center p-8 text-destructive">
-            <p>Error loading errors data</p>
+            {/* <p>Error loading errors data</p> */}
+            <p>载入错误资料时发生错误</p>
             <p className="text-sm">{errorsError?.toString()}</p>
           </div>
         ) : errorsDataArray && errorsDataArray.length > 0 ? (
@@ -121,14 +122,17 @@ export default function Errors() {
                 pagination={pagination}
                 setPagination={setPagination}
                 isLoading={isLoading}
-                itemName="errors"
+                // itemName="errors"
+                itemName="错误"
               />
             )}
           </>
         ) : !isLoadingErrors && !isFetching ? (
           <NothingFound
-            title={"No error events found"}
-            description={"Errors will appear here once error tracking is enabled and errors occur on your site."}
+            // title={"No error events found"}
+            // description={"Errors will appear here once error tracking is enabled and errors occur on your site."}
+            title={"无错误"}
+            description={"当您的页面开启错误追踪时，此页面会开始显示错误资料"}
           />
         ) : null}
       </div>

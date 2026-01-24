@@ -91,7 +91,8 @@ export function ErrorSparklineChart({ data, isHovering, errorMessage, isLoading 
             </div>
             <div className="flex justify-between items-center">
               <span className="font-medium text-red-400">
-                {currentY.toLocaleString()} {currentY === 1 ? "error" : "errors"}
+                {/* {currentY.toLocaleString()} {currentY === 1 ? "error" : "errors"} */}
+                {currentY.toLocaleString()}个错误
               </span>
             </div>
           </div>

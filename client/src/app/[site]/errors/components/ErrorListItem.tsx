@@ -62,7 +62,10 @@ export function ErrorListItem({ errorData }: ErrorListItemProps) {
                   <span className="text-base font-semibold">{errorData.count.toLocaleString()}</span>
                 </div>
                 <div>
-                  <span className="text-xs text-foreground/70">occurrences</span>
+                  <span className="text-xs text-foreground/70">
+                    {/* occurrences */}
+                    发生次数
+                  </span>
                 </div>
               </div>
 
@@ -72,7 +75,10 @@ export function ErrorListItem({ errorData }: ErrorListItemProps) {
                   <span className="text-base font-semibold">{errorData.sessionCount.toLocaleString()}</span>
                 </div>
                 <div>
-                  <span className="text-xs text-foreground/70">sessions</span>
+                  <span className="text-xs text-foreground/70">
+                    {/* sessions */}
+                    工作阶段
+                  </span>
                 </div>
               </div>
 

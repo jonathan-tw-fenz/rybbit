@@ -51,11 +51,13 @@ function ErrorEventItem({ errorEvent }: { errorEvent: ErrorEvent }) {
     if (event.country) {
       location += getCountryName(event.country);
     }
-    return location || "Unknown location";
+    // return location || "Unknown location";
+    return location || "未知地區";
   };
 
   const formatTimestamp = (timestamp: string) => {
-    return DateTime.fromSQL(timestamp, { zone: getTimezone() }).setLocale(userLocale).toRelative();
+    // return DateTime.fromSQL(timestamp, { zone: getTimezone() }).setLocale(userLocale).toRelative();
+    return DateTime.fromSQL(timestamp, { zone: getTimezone() }).setLocale("zh").toRelative();
   };
 
   return (
@@ -108,7 +110,8 @@ function ErrorEventItem({ errorEvent }: { errorEvent: ErrorEvent }) {
                 <DeviceIcon deviceType={errorEvent.device_type} />
               </TooltipTrigger>
               <TooltipContent>
-                <p>{errorEvent.device_type || "Unknown device"}</p>
+                {/* <p>{errorEvent.device_type || "Unknown device"}</p> */}
+                <p>{errorEvent.device_type || "未知裝置"}</p>
               </TooltipContent>
             </Tooltip>
           </div>
@@ -118,9 +121,12 @@ function ErrorEventItem({ errorEvent }: { errorEvent: ErrorEvent }) {
             rel="noopener noreferrer"
             className="text-sm text-neutral-600 dark:text-neutral-300 wrap-break-word hover:underline"
           >
-            {errorEvent.hostname && errorEvent.pathname
+            {/* {errorEvent.hostname && errorEvent.pathname
               ? `${errorEvent.hostname}${errorEvent.pathname}`
-              : errorEvent.pathname || errorEvent.hostname || "Unknown page"}
+              : errorEvent.pathname || errorEvent.hostname || "Unknown page"} */}
+            {errorEvent.hostname && errorEvent.pathname
+            ? `${errorEvent.hostname}${errorEvent.pathname}`
+            : errorEvent.pathname || errorEvent.hostname || "未知頁面"}
           </Link>
         </div>
         <div className="flex items-center gap-2">
@@ -132,7 +138,8 @@ function ErrorEventItem({ errorEvent }: { errorEvent: ErrorEvent }) {
                 {errorEvent.session_id.substring(0, 8)}
               </Badge>
             </TooltipTrigger>
-            <TooltipContent>Session ID: {errorEvent.session_id}</TooltipContent>
+            {/* <TooltipContent>Session ID: {errorEvent.session_id}</TooltipContent> */}
+            <TooltipContent>工作階段ID: {errorEvent.session_id}</TooltipContent>
           </Tooltip>
 
           {/* User ID if available */}
@@ -146,7 +153,8 @@ function ErrorEventItem({ errorEvent }: { errorEvent: ErrorEvent }) {
                   </Badge>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent>User ID: {errorEvent.user_id}</TooltipContent>
+              {/* <TooltipContent>User ID: {errorEvent.user_id}</TooltipContent> */}
+              <TooltipContent>使用者ID: {errorEvent.user_id}</TooltipContent>
             </Tooltip>
           )}
         </div>
@@ -157,9 +165,11 @@ function ErrorEventItem({ errorEvent }: { errorEvent: ErrorEvent }) {
         <div className="flex items-start gap-2 text-red-400">
           <TriangleAlert className="w-4 h-4 mt-0.5 shrink-0" />
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium mb-1">Error</p>
+            {/* <p className="text-sm font-medium mb-1">Error</p> */}
+            <p className="text-sm font-medium mb-1">錯誤</p>
             <p className="text-sm text-neutral-600 dark:text-neutral-300 wrap-break-word">
-              {errorEvent.message || "No message available"}
+              {/* {errorEvent.message || "No message available"} */}
+              {errorEvent.message || "無錯誤訊息"}
             </p>
           </div>
         </div>
@@ -286,8 +296,10 @@ export function ErrorDetails({ errorMessage }: ErrorDetailsProps) {
   if (isError) {
     return (
       <ErrorState
-        title="Failed to load errors"
-        message="There was a problem fetching the errors. Please try again later."
+        // title="Failed to load errors"
+        // message="There was a problem fetching the errors. Please try again later."
+        title="載入錯誤資料失敗"
+        message="載入錯誤資料時發生錯誤，請稍後再試"
       />
     );
   }
@@ -297,8 +309,10 @@ export function ErrorDetails({ errorMessage }: ErrorDetailsProps) {
       <div className="p-4 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800">
         <div className="text-center text-neutral-500 dark:text-neutral-400">
           <AlertTriangle className="w-6 h-6 mx-auto mb-2" />
-          <p>No error events found</p>
-          <p className="text-sm">This error may have occurred outside the current time range.</p>
+          {/* <p>No error events found</p>
+          <p className="text-sm">This error may have occurred outside the current time range.</p> */}
+          <p>無錯誤事件</p>
+          <p className="text-sm">此錯誤可能發生於所選時段外</p>
         </div>
       </div>
     );
@@ -321,10 +335,12 @@ export function ErrorDetails({ errorMessage }: ErrorDetailsProps) {
             {isFetchingNextPage ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                <span>Loading...</span>
+                {/* <span>Loading...</span> */}
+                <span>載入中...</span>
               </>
             ) : (
-              <span>Load More</span>
+              // <span>Load More</span>
+              <span>載入更多</span>
             )}
           </Button>
         </div>
@@ -332,7 +348,8 @@ export function ErrorDetails({ errorMessage }: ErrorDetailsProps) {
 
       {totalCount > 0 && (
         <div className="text-center text-xs text-neutral-500 dark:text-neutral-500 mt-2">
-          Showing {allErrorEvents.length} of {totalCount} error events
+          {/* Showing {allErrorEvents.length} of {totalCount} error events */}
+          顯示{allErrorEvents.length}個錯誤事件，共{totalCount}個
         </div>
       )}
     </div>
