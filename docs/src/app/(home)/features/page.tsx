@@ -1,6 +1,5 @@
 import { BackgroundGrid } from "@/components/BackgroundGrid";
 import { CTASection } from "@/components/CTASection";
-import { SectionBadge } from "@/components/SectionBadge";
 import { TrackedButton } from "@/components/TrackedButton";
 import { DEFAULT_EVENT_LIMIT } from "@/lib/const";
 import {
@@ -9,13 +8,11 @@ import {
   ArrowLeftRight,
   Bot,
   CheckCircle,
-  Clock,
   Cookie,
   Database,
   Eye,
   Funnel,
   Gauge,
-  Globe,
   Globe2,
   Languages,
   Layers,
@@ -31,7 +28,6 @@ import {
   Route,
   Search,
   Settings,
-  Shield,
   ShieldCheck,
   Smartphone,
   Tag,
@@ -285,12 +281,11 @@ interface FeatureGridProps {
     title: string;
     description: string;
   }>;
-  bgClassName?: string;
 }
 
-function FeatureGrid({ title, description, features, bgClassName = "" }: FeatureGridProps) {
+function FeatureGrid({ title, description, features }: FeatureGridProps) {
   return (
-    <section className={`py-12 md:py-16 w-full relative z-10 ${bgClassName}`}>
+    <section className="py-12 md:py-16 w-full relative z-10">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{title}</h2>
@@ -299,7 +294,7 @@ function FeatureGrid({ title, description, features, bgClassName = "" }: Feature
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {features.map((feature, index) => (
-            <div key={index} className="bg-neutral-200/50 dark:bg-neutral-800/20 rounded-lg p-5 transition-colors">
+            <div key={index} className="bg-neutral-100/50 dark:bg-neutral-800/20 border border-neutral-300/50 dark:border-neutral-800/50 rounded-lg p-5 transition-colors">
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
                   <div className="text-neutral-600 dark:text-neutral-400">{feature.icon}</div>
@@ -368,7 +363,6 @@ export default function FeaturesPage() {
         title="Advanced Analytics"
         description="Go deeper with powerful tools for session replay, funnels, comparisons, and advanced user behavior analysis."
         features={advancedAnalyticsFeatures}
-        bgClassName="bg-neutral-100/30 dark:bg-neutral-900/50"
       />
 
       <FeatureGrid
@@ -381,7 +375,6 @@ export default function FeaturesPage() {
         title="Privacy"
         description="Privacy isn't a feature—it's the foundation. Analytics that respect your users and comply with regulations automatically."
         features={privacyFeatures}
-        bgClassName="bg-neutral-100/30 dark:bg-neutral-900/50"
       />
 
       <FeatureGrid
