@@ -1,3 +1,4 @@
+import { BackgroundGrid } from "@/components/BackgroundGrid";
 import { CTASection } from "@/components/CTASection";
 import { SectionBadge } from "@/components/SectionBadge";
 import { TrackedButton } from "@/components/TrackedButton";
@@ -289,7 +290,7 @@ interface FeatureGridProps {
 
 function FeatureGrid({ title, description, features, bgClassName = "" }: FeatureGridProps) {
   return (
-    <section className={`py-12 md:py-16 w-full ${bgClassName}`}>
+    <section className={`py-12 md:py-16 w-full relative z-10 ${bgClassName}`}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{title}</h2>
@@ -317,11 +318,11 @@ function FeatureGrid({ title, description, features, bgClassName = "" }: Feature
 export default function FeaturesPage() {
   return (
     <div className="flex flex-col items-center justify-center overflow-x-hidden">
+      <BackgroundGrid />
       {/* Hero Section */}
-      <section className="py-16 md:py-24 w-full">
+      <section className="py-16 md:py-24 w-full relative z-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <SectionBadge className="mb-6">Features</SectionBadge>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
               Everything you need to understand your audience
             </h1>

@@ -255,7 +255,7 @@ function FeatureCell({ value }: FeatureCellProps) {
 
 export function ComparisonSection() {
   return (
-    <section className="-mt-8 pb-8 w-full">
+    <section className="-mt-8 pb-8 w-full relative z-10">
       <div className="max-w-7xl mx-auto px-4 overflow-x-auto">
         <div className="w-full border border-neutral-300/50 dark:border-neutral-800/50 rounded-lg min-w-[800px] ">
           {/* Table Header */}
