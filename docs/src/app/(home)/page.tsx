@@ -6,26 +6,24 @@ import { Marquee } from "@/components/magicui/marquee";
 import { SectionBadge } from "@/components/SectionBadge";
 import { TrackedButton } from "@/components/TrackedButton";
 import { TweetCard } from "@/components/Tweet";
+import { ActivityIcon } from "@/components/ui/activity";
+import { ArrowDownIcon } from "@/components/ui/arrow-down";
+import { BanIcon } from "@/components/ui/ban";
+import { BellIcon } from "@/components/ui/bell";
+import { BotIcon } from "@/components/ui/bot";
+import { CircleCheckIcon } from "@/components/ui/circle-check";
+import { DownloadIcon } from "@/components/ui/download";
+import { EarthIcon } from "@/components/ui/earth";
+import { GaugeIcon } from "@/components/ui/gauge";
+import { LayersIcon } from "@/components/ui/layers";
+import { LinkIcon } from "@/components/ui/link";
+import { PlayIcon } from "@/components/ui/play";
+import { RouteIcon } from "@/components/ui/route";
+import { ShieldCheckIcon } from "@/components/ui/shield-check";
+import { TerminalIcon } from "@/components/ui/terminal";
+import { UsersIcon } from "@/components/ui/users";
+import { ZapIcon } from "@/components/ui/zap";
 import { cn } from "@/lib/utils";
-import {
-  Activity,
-  Bot,
-  Building,
-  CheckCircle,
-  Code,
-  Cookie,
-  Download,
-  Funnel,
-  Gauge,
-  Globe2,
-  Layers,
-  Mail,
-  Plug,
-  Route,
-  ShieldCheck,
-  Video,
-  Zap,
-} from "lucide-react";
 import { Tilt_Warp } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -103,82 +101,82 @@ export const metadata = {
 
 const features = [
   {
-    icon: Zap,
+    icon: ZapIcon,
     title: "Setup in minutes",
     description: "Add one line of code and start seeing real-time data instantly.",
   },
   {
-    icon: Activity,
+    icon: ActivityIcon,
     title: "Realtime data",
     description: "See what's happening on your site right now.",
   },
   {
-    icon: Video,
+    icon: PlayIcon,
     title: "Session replay",
     description: "Watch real user sessions to spot usability issues.",
   },
   {
-    icon: Funnel,
+    icon: ArrowDownIcon,
     title: "Funnels",
     description: "Visualize conversion paths and find where visitors drop off.",
   },
   {
-    icon: Route,
+    icon: RouteIcon,
     title: "User journeys",
     description: "Map how users navigate from landing to conversion.",
   },
   {
-    icon: Gauge,
+    icon: GaugeIcon,
     title: "Web vitals",
     description: "Monitor Core Web Vitals for fast user experiences.",
   },
   {
-    icon: Layers,
+    icon: LayersIcon,
     title: "Custom events",
     description: "Track sign-ups, purchases, and any user interaction.",
   },
   {
-    icon: Bot,
+    icon: BotIcon,
     title: "Bot blocking",
     description: "Automatically filter out bots to keep data clean.",
   },
   {
-    icon: Cookie,
+    icon: BanIcon,
     title: "No cookies",
     description: "Zero cookies, zero banners. Cleaner visitor experiences.",
   },
   {
-    icon: ShieldCheck,
+    icon: ShieldCheckIcon,
     title: "GDPR & CCPA",
     description: "Privacy-first design means you're compliant out of the box.",
   },
   {
-    icon: Globe2,
+    icon: EarthIcon,
     title: "Globe views",
     description: "Watch traffic flow with stunning 3D globe visualizations.",
   },
   {
-    icon: Code,
+    icon: TerminalIcon,
     title: "Open source",
     description: "100% open source. Self-host or use our cloud.",
   },
   {
-    icon: Plug,
+    icon: LinkIcon,
     title: "API",
     description: "Full API access to build custom integrations.",
   },
   {
-    icon: Download,
+    icon: DownloadIcon,
     title: "Data export",
     description: "Export your raw data anytime. No lock-in.",
   },
   {
-    icon: Mail,
+    icon: BellIcon,
     title: "Email reports",
     description: "Automated reports delivered to your inbox.",
   },
   {
-    icon: Building,
+    icon: UsersIcon,
     title: "Organizations",
     description: "Manage sites and team access in one place.",
   },
@@ -241,7 +239,7 @@ export default function HomePage() {
             </TrackedButton>
           </div>
           <p className="text-neutral-500 dark:text-neutral-400 text-xs md:text-sm flex items-center justify-center gap-2 mt-6">
-            <CheckCircle className="w-3 h-3 md:w-4 md:h-4" />
+            <CircleCheckIcon size={16} className="text-neutral-500 dark:text-neutral-400" />
             First {DEFAULT_EVENT_LIMIT.toLocaleString()} pageviews/m are free. No credit card required.
           </p>
         </div>
@@ -391,7 +389,7 @@ export default function HomePage() {
                   className="bg-neutral-100/50 dark:bg-neutral-900 border border-neutral-300/50 dark:border-neutral-800/50 rounded-lg p-5 transition-colors"
                 >
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
-                    <Icon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
+                    <Icon size={20} className="text-neutral-600 dark:text-neutral-400" />
                     {feature.title}
                   </h3>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
